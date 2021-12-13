@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import index from './views/index.vue';
 import login from './views/login.vue';
+import signup from './views/signup.vue';
+import knowledge from './views/knowledge.vue';
 
 const routes = [
   {
@@ -13,6 +15,14 @@ const routes = [
   {
     path: '/login',
     component: login
+  },
+  {
+    path: '/signup',
+    component: signup
+  },
+  {
+    path: '/knowledge/:id',
+    component: knowledge
   }
 ];
 
