@@ -9,7 +9,9 @@ const onClick = () => {
 };
 </script>
 <template>
-  <input type="text" v-model="state.name">
-  <button @click="onClick">Add</button>
+  <form class="pure-form">
+    <input type="text" v-model="state.name">
+    <button @click="onClick" class="pure-button pure-button-primary">Add</button>
+  </form>
 </template>
 
