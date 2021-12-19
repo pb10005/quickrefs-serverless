@@ -21,7 +21,7 @@ axios.get(`/knowledges`)
 <template>
   <div>
     <not-logged-in-card />
-    <AddMemForm @success="onSuccess" />
+    <router-link to="/knowledge/add">ナレッジを新規作成</router-link>
     <p>ナレッジ</p>
     <knowledge-list :knowledgeList="state.list"/>
   </div>

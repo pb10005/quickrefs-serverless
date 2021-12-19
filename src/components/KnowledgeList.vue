@@ -11,7 +11,7 @@ defineProps({
     <ul class="">
       <li class="panel" v-for="item in knowledgeList" :key="item">
         <div class="panel-header">
-          <router-link :to="`/knowledge/${item.id}`">{{item.name}}</router-link>
+          <router-link :to="`/knowledge/view/${item.id}`">{{item.name}}</router-link>
         </div>
         <div class="panel-body">
           {{item.description}}
