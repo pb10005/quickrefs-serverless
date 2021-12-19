@@ -2,6 +2,7 @@
 import { reactive } from "vue";
 import { useRoute } from 'vue-router'
 import axios from "../http_client.js";
+import ReferenceList from "../components/ReferenceList.vue"
 
 const route = useRoute();
 const state = reactive({
@@ -29,9 +30,8 @@ axios.get(`/knowledges/${route.params.id}`)
   <div>
     {{state.description}}
   </div>
-  <ul>
-    <li v-for="item in state.list" :key="item">{{item}}</li>
-  </ul>
+  <p>リファレンス</p>
+  <reference-list :referenceList="state.list"></reference-list>
 </template>
 
 <style scoped>

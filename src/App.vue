@@ -5,6 +5,11 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <div class="pure-menu-list">
+    <li class="pure-menu-item pure-menu-selected">
+        <a href="/" class="pure-menu-link">Home</a>
+    </li>
+  </div>
   <router-view />
 </template>
 
@@ -13,8 +18,5 @@ import HelloWorld from './components/HelloWorld.vue'
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

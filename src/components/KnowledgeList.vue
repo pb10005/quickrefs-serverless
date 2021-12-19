@@ -1,22 +1,23 @@
 <script setup>
-import { reactive } from "vue";
+import { defineProps } from "vue";
 
-import axios from "../http_client.js";
-
-const state = reactive({
-  list: []
+defineProps({
+  knowledgeList: []
 });
 
-axios.get("/knowledges")
-  .then(docs => {
-    state.list = docs.data;
-  });
 </script>
 <template>
-  <div>
-    <ul>
-      <li v-for="item in state.list" :key="item">
-        <router-link :to="`/knowledge/${item.id}`">{{item.name}}</router-link>
+  <div class="">
+    <ul class="">
+      <li class="panel" v-for="item in knowledgeList" :key="item">
+        <div class="panel-header">
+          <router-link :to="`/knowledge/${item.id}`">{{item.name}}</router-link>
+        </div>
+        <div class="panel-body">
+          {{item.description}}
+        </div>
+        <div class="panel-footer">
+        </div>
       </li>
     </ul>
   </div>
