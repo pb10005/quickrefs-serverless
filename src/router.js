@@ -6,6 +6,7 @@ import index from './views/index.vue';
 import login from './views/login.vue';
 import signup from './views/signup.vue';
 import knowledge from './views/knowledge.vue';
+import knowledge_add from './views/knowledge_add.vue';
 
 const routes = [
   {
@@ -21,8 +22,12 @@ const routes = [
     component: signup
   },
   {
-    path: '/knowledge/:id',
+    path: '/knowledge/view/:id',
     component: knowledge
+  },
+  {
+    path: '/knowledge/add',
+    component: knowledge_add
   }
 ];
 
