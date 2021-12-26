@@ -11,12 +11,13 @@ defineProps({
     <ul class="">
       <li class="panel" v-for="item in knowledgeList" :key="item">
         <div class="panel-header">
-          <router-link :to="`/knowledge/view/${item.id}`">{{item.name}}</router-link>
+          <p>{{item.name}}</p>
         </div>
         <div class="panel-body">
           {{item.description}}
         </div>
         <div class="panel-footer">
+          <router-link class="pure-button" :to="`/knowledge/view/${item.id}`">詳細</router-link>
         </div>
       </li>
     </ul>

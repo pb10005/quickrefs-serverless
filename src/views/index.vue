@@ -19,11 +19,17 @@ axios.get(`/knowledges`)
 </script>
 
 <template>
-  <div>
-    <not-logged-in-card />
-    <router-link to="/knowledge/add">ナレッジを新規作成</router-link>
-    <p>ナレッジ</p>
-    <knowledge-list :knowledgeList="state.list"/>
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <not-logged-in-card />
+    </div>
+    <div class="pure-u-1">
+    <router-link class="pure-button" to="/knowledge/add">ナレッジを新規作成</router-link>
+    </div>
+    <div class="pure-u-1">
+      <p>ナレッジ</p>
+      <knowledge-list :knowledgeList="state.list"/>
+    </div>
   </div>
 </template>
 

@@ -19,11 +19,25 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form">
-    <input type="text" v-model="state.name"><br>
-    <input type="text" v-model="state.description"><br>
-    <input type="text" v-model="state.url"><br>
-    <button class="pure-button pure-button-primary">Add</button>
+  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
+    <fieldset>
+      <legend>リファレンスを新規作成</legend>
+      <div class="pure-control-group">
+        <label for="name">表示名</label>
+        <input id="name" type="text" v-model="state.name" required>
+      </div>
+      <div class="pure-control-group">
+        <label for="description">説明</label>
+        <input type="text" v-model="state.description">
+      </div>
+      <div class="pure-control-group">
+        <label for="url">URL</label>
+        <input id="url" type="text" v-model="state.url">
+      </div>
+      <div class="pure-controls">
+        <button class="pure-button pure-button-primary">Add</button>
+      </div>
+    </fieldset>
   </form>
 </template>
 
