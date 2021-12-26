@@ -25,14 +25,14 @@ axios.get(`/knowledges/${route.params.id}`)
 </script>
 
 <template>
-  <div>
+  <h2>
     {{state.name}}
-  </div>
-  <div>
+  </h2>
+  <p>
     {{state.description}}
-  </div>
+  </p>
   <add-reference-form></add-reference-form>
-  <p>リファレンス</p>
+  <h3>リファレンス</h3>
   <reference-list :referenceList="state.list"></reference-list>
 </template>
 

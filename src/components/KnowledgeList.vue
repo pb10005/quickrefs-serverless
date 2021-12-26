@@ -7,9 +7,8 @@ defineProps({
 
 </script>
 <template>
-  <div class="">
-    <ul class="">
-      <li class="panel" v-for="item in knowledgeList" :key="item">
+    <div class="pure-u-sm-1-3 pure-u-md-1-4" v-for="item in knowledgeList" :key="item">
+      <div class="panel">
         <div class="panel-header">
           <p>{{item.name}}</p>
         </div>
@@ -19,8 +18,11 @@ defineProps({
         <div class="panel-footer">
           <router-link class="pure-button" :to="`/knowledge/view/${item.id}`">詳細</router-link>
         </div>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
 </template>
-
+<style scoped>
+.panel {
+  padding: 5px;
+}
+</style>

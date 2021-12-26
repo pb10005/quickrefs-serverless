@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from "vue";
+import axios from "../http_client.js";
 
 const state = reactive({
  id: "",
@@ -7,7 +8,12 @@ const state = reactive({
 });
 
 const login = () => {
-  alert(state.password);
+  axios.post("/auth/login", {
+    name: state.id,
+    password: state.password
+  }).then(doc => {
+    localStorage.setItem("sessionId", doc.data);
+  });
 };
 </script>
 

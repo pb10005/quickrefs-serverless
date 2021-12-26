@@ -5,10 +5,15 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <div class="pure-menu pure-menu-horizontal">
   <div class="pure-menu-list">
-    <li class="pure-menu-item pure-menu-selected">
+    <li class="pure-menu-item">
         <a href="/" class="pure-menu-link">Home</a>
     </li>
+    <li class="pure-menu-item">
+        <router-link to="/signup" class="pure-menu-link">登録</router-link>
+    </li>
+  </div>
   </div>
   <router-view />
 </template>

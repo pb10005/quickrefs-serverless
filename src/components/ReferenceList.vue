@@ -13,9 +13,11 @@ defineProps({
         <div class="panel-header">
           <p>{{item.name}}</p>
         </div>
-        <div class="panel-body"></div>
+        <div class="panel-body">
+          <p v-if="item.description">{{item.description}}</p>
+        </div>
         <div class="panel-footer">
-          <a target="blank" :href="item.url">Link</a>
+          <a v-if="item.url" class="pure-button" target="blank" :href="item.url">表示</a>
         </div>
       </li>
     </ul>

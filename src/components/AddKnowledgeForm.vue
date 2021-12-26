@@ -1,17 +1,21 @@
 <script setup>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import axios from "../http_client.js";
+
+const router = useRouter();
 const state = reactive({
  name: "",
  description: "",
  isPrivate: false
 });
 const sendData = () => {
+  const sessionId = localStorage.getItem("sessionId");
   axios.post("/Knowledges", {
     name: state.name,
     description: state.description,
     isPrivate: state.isPrivate
-  });
+  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => router.push("/"));
 };
 </script>
 <template>

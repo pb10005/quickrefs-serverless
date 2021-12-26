@@ -3,7 +3,7 @@
 <template>
     <div class="card">
       <p>まだログインしていません</p>
-      <router-link to="/login">ログイン</router-link>
+      <router-link class="pure-button pure-button-primary" to="/login">ログイン</router-link>
     </div>
 </template>
 <style scoped>
