@@ -11,6 +11,9 @@ import HelloWorld from './components/HelloWorld.vue'
         <a href="/" class="pure-menu-link">Home</a>
     </li>
     <li class="pure-menu-item">
+        <router-link to="/profile" class="pure-menu-link">プロフィール</router-link>
+    </li>
+    <li class="pure-menu-item">
         <router-link to="/signup" class="pure-menu-link">登録</router-link>
     </li>
   </div>

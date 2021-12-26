@@ -7,6 +7,7 @@ import login from './views/login.vue';
 import signup from './views/signup.vue';
 import knowledge from './views/knowledge.vue';
 import knowledge_add from './views/knowledge_add.vue';
+import profile from './views/profile.vue';
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/knowledge/add',
     component: knowledge_add
+  },
+  {
+    path: '/profile',
+    component: profile
   }
 ];
 

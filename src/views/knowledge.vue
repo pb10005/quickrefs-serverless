@@ -31,8 +31,8 @@ axios.get(`/knowledges/${route.params.id}`)
   <p>
     {{state.description}}
   </p>
-  <add-reference-form></add-reference-form>
   <h3>リファレンス</h3>
+  <add-reference-form></add-reference-form>
   <reference-list :referenceList="state.list"></reference-list>
 </template>
 
