@@ -12,16 +12,19 @@ const state = reactive({
   list: []
 });
 
-axios.get(`/knowledges/${route.params.id}`)
-  .then(doc => {
-    state.name = doc.data.name;
-    state.description = doc.data.description;
-    return axios.get(`/references/findbyknowledge/${route.params.id}`);
-  })
-  .then(doc => {
-    state.list = doc.data;
-  });
+const fetchKnowledges = () => {
+  axios.get(`/knowledges/${route.params.id}`)
+          .then(doc => {
+            state.name = doc.data.name;
+            state.description = doc.data.description;
+            return axios.get(`/references/findbyknowledge/${route.params.id}`);
+          })
+          .then(doc => {
+            state.list = doc.data;
+          });
+};
 
+fetchKnowledges();
 </script>
 
 <template>
@@ -32,7 +35,7 @@ axios.get(`/knowledges/${route.params.id}`)
     {{state.description}}
   </p>
   <h3>リファレンス</h3>
-  <add-reference-form></add-reference-form>
+  <add-reference-form @submit="fetchKnowledges"></add-reference-form>
   <reference-list :referenceList="state.list"></reference-list>
 </template>
 

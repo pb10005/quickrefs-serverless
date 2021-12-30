@@ -28,10 +28,10 @@ const sendData = () => {
     </div>
     <div class="pure-control-group">
       <label for="description">説明</label>
-      <input id="description" type="text" v-model="state.description"><br>
+      <textarea id="description" type="text" v-model="state.description"></textarea>
     </div>
     <div class="pure-controls">
-      <button class="pure-button pure-button-primary">Add</button>
+      <button class="pure-button pure-button-primary">作成</button>
     </div>
     </fieldset>
   </form>

@@ -4,18 +4,22 @@ import { useRoute } from "vue-router";
 import axios from "../http_client.js";
 
 const route = useRoute();
+
+const emit = defineEmits();
+
 const state = reactive({
  name: "",
  description: "",
  url: ""
 });
+
 const sendData = () => {
   axios.post("/References", {
     name: state.name,
     description: state.description,
     knowledgeId: route.params.id,
     url: state.url
-  });
+  }).then(() => emit("submit"));
 };
 </script>
 <template>
@@ -28,7 +32,7 @@ const sendData = () => {
       </div>
       <div class="pure-control-group">
         <label for="description">説明</label>
-        <input type="text" v-model="state.description">
+        <textarea type="text" v-model="state.description"></textarea>
       </div>
       <div class="pure-control-group">
         <label for="url">URL</label>
