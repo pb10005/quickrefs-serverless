@@ -11,6 +11,9 @@
         <router-link to="/profile" class="pure-menu-link">プロフィール</router-link>
     </li>
     <li class="pure-menu-item">
+        <router-link to="/tag" class="pure-menu-link">タグ</router-link>
+    </li>
+    <li class="pure-menu-item">
         <router-link to="/signup" class="pure-menu-link">登録</router-link>
     </li>
   </div>

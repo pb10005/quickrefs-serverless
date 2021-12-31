@@ -8,6 +8,7 @@ import signup from './views/signup.vue';
 import knowledge from './views/knowledge.vue';
 import knowledge_add from './views/knowledge_add.vue';
 import profile from './views/profile.vue';
+import tag from './views/tag.vue';
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/profile',
     component: profile
+  },
+  {
+    path: '/tag',
+    component: tag
   }
 ];
 

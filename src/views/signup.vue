@@ -23,11 +23,11 @@ const signup = () => {
         <legend>新規登録</legend>
         <div class="pure-control-group">
           <label for="id">ID</label>
-          <input id="id" type="text" placeholder="Id" v-model="state.id"><br>
+          <input id="id" type="text" placeholder="Id" v-model="state.id" required><br>
         </div>
         <div class="pure-control-group">
           <label for="password">パスワード</label>
-          <input id="password" type="password" placeholder="password" v-model="state.password"><br>
+          <input id="password" type="password" placeholder="password" v-model="state.password" required><br>
         </div>
         <div class="pure-controls">
           <input type="submit" class="pure-button pure-button-primary" value="登録">
