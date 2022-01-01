@@ -4,12 +4,14 @@ import { useRoute } from 'vue-router'
 import axios from "../http_client.js";
 import ReferenceList from "../components/ReferenceList.vue";
 import AddReferenceForm from "../components/AddReferenceForm.vue";
+import TagList from "../components/TagList.vue";
 
 const route = useRoute();
 const state = reactive({
   name: "",
   description: "",
-  list: []
+  list: [],
+  tags: []
 });
 
 const fetchKnowledges = () => {
@@ -34,6 +36,8 @@ fetchKnowledges();
   <p>
     {{state.description}}
   </p>
+  <h3>タグ</h3>
+  <tag-list :tags="state.tags"></tag-list>
   <h3>リファレンス</h3>
   <add-reference-form @submit="fetchKnowledges"></add-reference-form>
   <reference-list :referenceList="state.list"></reference-list>
