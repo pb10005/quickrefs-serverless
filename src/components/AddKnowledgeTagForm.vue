@@ -12,7 +12,10 @@ const state = reactive({
 });
 
 const sendData = () => {
-  axios.post("/Tags", {name : state.name}).then(() => emit("submit"));
+  axios.get(`/Tags/findbyname/${state.name}`)
+    .then(doc => {
+      axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}).then(() => emit("submit"));
+    }).catch(err => {console.log(err.message);});
 };
 </script>
 <template>

@@ -5,13 +5,16 @@
   <div class="pure-menu pure-menu-horizontal">
   <div class="pure-menu-list">
     <li class="pure-menu-item">
-        <a href="/" class="pure-menu-link">Home</a>
+        <router-link to="/" class="pure-menu-link">Home</router-link>
     </li>
     <li class="pure-menu-item">
         <router-link to="/profile" class="pure-menu-link">プロフィール</router-link>
     </li>
     <li class="pure-menu-item">
         <router-link to="/tag" class="pure-menu-link">タグ</router-link>
+    </li>
+    <li class="pure-menu-item">
+        <router-link to="/login" class="pure-menu-link">ログイン</router-link>
     </li>
     <li class="pure-menu-item">
         <router-link to="/signup" class="pure-menu-link">登録</router-link>

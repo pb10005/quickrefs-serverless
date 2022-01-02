@@ -1,7 +1,9 @@
 <script setup>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import axios from "../http_client.js";
 
+const router = useRouter();
 const state = reactive({
  id: "",
  password: ""
@@ -13,6 +15,7 @@ const login = () => {
     password: state.password
   }).then(doc => {
     localStorage.setItem("sessionId", doc.data);
+    router.push("/profile");
   });
 };
 </script>
