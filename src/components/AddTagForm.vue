@@ -12,7 +12,10 @@ const state = reactive({
 });
 
 const sendData = () => {
-  axios.post("/Tags", {name : state.name}).then(() => emit("submit"));
+  axios.post("/Tags", {name : state.name}).then(() => {
+    state.name = "";
+    emit("submit")
+  });
 };
 </script>
 <template>

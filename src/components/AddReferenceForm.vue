@@ -19,7 +19,12 @@ const sendData = () => {
     description: state.description,
     knowledgeId: route.params.id,
     url: state.url
-  }).then(() => emit("submit"));
+  }).then(() => {
+    state.name = "";
+    state.description = "";
+    state.url = "";
+    emit("submit")
+  });
 };
 </script>
 <template>
