@@ -21,7 +21,9 @@
     </li>
   </div>
   </div>
-  <router-view />
+  <div class="container"> 
+    <router-view/>
+  </div>
 </template>
 
 <style>
@@ -29,5 +31,11 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.container {
+  padding: 5px;
+}
+.button-small {
+  font-size: 80%;
 }
 </style>

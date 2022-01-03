@@ -12,7 +12,9 @@ const state = reactive({
   name: "",
   description: "",
   list: [],
-  tags: []
+  tags: [],
+  isAddTagFormVisible: false,
+  isAddReferenceFormVisible: false
 });
 
 const fetchKnowledges = () => {
@@ -38,18 +40,27 @@ fetchKnowledges();
   <h2>
     {{state.name}}
   </h2>
+  <div class="container">
+    <tag-list :tags="state.tags"></tag-list>
+  </div>
   <p>
     {{state.description}}
   </p>
-  <h3>タグ</h3>
-  <add-knowledge-tag-form></add-knowledge-tag-form>
-  <tag-list :tags="state.tags"></tag-list>
-  <h3>リファレンス</h3>
-  <add-reference-form @submit="fetchKnowledges"></add-reference-form>
-  <reference-list :referenceList="state.list"></reference-list>
+  <a class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
+  <a class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
+  <add-knowledge-tag-form v-show="state.isAddTagFormVisible"></add-knowledge-tag-form>
+  <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
+  <div class="container">
+    <reference-list :referenceList="state.list"></reference-list>
+  </div>
 </template>
 
 <style scoped>
-
+.button-small {
+  font-size: 80%;
+}
+.container {
+  padding: 5px;
+}
 
 </style>

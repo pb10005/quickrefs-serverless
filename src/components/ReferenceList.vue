@@ -8,19 +8,19 @@ defineProps({
 </script>
 <template>
   <div class="">
-    <ul class="">
-      <li class="panel" v-for="item in referenceList" :key="item">
+    <div class="">
+      <div class="panel pure-u-sm-1-3 pure-u-md-1-4" v-for="item in referenceList" :key="item">
         <div class="panel-header">
-          <p>{{item.name}}</p>
+          <span>{{item.name}}</span>
         </div>
         <div class="panel-body">
-          <p v-if="item.description">{{item.description}}</p>
+          <small v-if="item.description">{{item.description}}</small>
         </div>
         <div class="panel-footer">
-          <a v-if="item.url" class="pure-button" target="blank" :href="item.url">表示</a>
+          <a v-if="item.url" class="button-small pure-button" target="_blank" :href="item.url">表示</a>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
