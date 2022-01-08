@@ -1,42 +1,36 @@
 <script setup>
-import KnowledgeList from "../components/KnowledgeList.vue";
-import NotLoggedInCard from "../components/NotLoggedInCard.vue";
-import axios from "../http_client.js";
-import { reactive } from "@vue/reactivity";
+import { reactive } from 'vue';
+import TagList from '../components/TagList.vue';
+import AddTagForm from '../components/AddTagForm.vue';
+import KnowledgeList from '../components/KnowledgeList.vue';
+import axios from '../http_client.js';
 
 const state = reactive({
-  isLogginIn: false,
-  list: []
+  tags: [],
+  knowledges: []
 });
 
-const onSuccess = (msg) => {
-  alert(msg);
+const onSubmit = () => {
 };
 
-state.isLoggedIn = localStorage.getItem("sessionId") ? true : false;
-axios.get(`/knowledges`)
-  .then(doc => {
-    state.list = doc.data;
-  });
-</script>
+const onTagSelected = (tagId) => {
+  axios.get(`/KnowledgeTags/findByTag/${tagId}`)
+    .then(docs => {
+      state.knowledges = docs.data;
+    });
+};
 
+axios.get('/Tags')
+  .then(docs => {
+    state.tags = docs.data;
+   });
+</script>
 <template>
-  <div class="pure-g">
-    <div class="pure-u-1">
-      <not-logged-in-card v-if="!state.isLoggedIn"/>
-    </div>
-    <div class="pure-u-1">
-      <h2>ナレッジ</h2>
-      <div class="pure-u-1">
-        <router-link class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成</router-link>
-      </div>
-      <knowledge-list :knowledgeList="state.list"/>
-    </div>
+  <div>
+    <h2>タグ</h2>
+    <add-tag-form @submit="onSubmit"></add-tag-form>
+    <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
+    <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
   </div>
 </template>
-
-<style scoped>
-
-
-</style>
 
