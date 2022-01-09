@@ -15,7 +15,7 @@ const sendData = () => {
     name: state.name,
     description: state.description,
     isPrivate: state.isPrivate
-  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => router.push("/"));
+  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => router.push("/knowledge/list"));
 };
 </script>
 <template>

@@ -1,15 +1,17 @@
 <script setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { useRoute } from 'vue-router'
 import axios from "../http_client.js";
 import ReferenceList from "../components/ReferenceList.vue";
 import AddReferenceForm from "../components/AddReferenceForm.vue";
 import AddKnowledgeTagForm from "../components/AddKnowledgeTagForm.vue";
 import TagList from "../components/TagList.vue";
+import EditKnowledgeForm from "../components/EditKnowledgeForm.vue";
 
 const route = useRoute();
 const state = reactive({
   name: "",
+  isEditMode: false,
   description: "",
   list: [],
   tags: [],
@@ -33,22 +35,32 @@ const fetchKnowledges = () => {
           });
 };
 
-fetchKnowledges();
+const onSubmit = () => {
+  fetchKnowledges();
+};
+
+onMounted(() => {
+  fetchKnowledges();
+});
 </script>
 
 <template>
-  <h2>
-    {{state.name}}
-  </h2>
+  <div v-show="!state.isEditMode">
+    <h2>
+      {{state.name}}
+    </h2>
+    <p>
+      {{state.description}}
+    </p>
+    <a class="button-small pure-button pure-button-primary" @click="state.isEditMode = true">編集</a>
+  </div>
+  <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
   <div class="container">
     <tag-list :tags="state.tags"></tag-list>
   </div>
-  <p>
-    {{state.description}}
-  </p>
   <a class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
   <a class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
-  <add-knowledge-tag-form v-show="state.isAddTagFormVisible"></add-knowledge-tag-form>
+  <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
   <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
   <div class="container">
     <reference-list :referenceList="state.list"></reference-list>
