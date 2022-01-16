@@ -30,6 +30,10 @@ const sendData = () => {
       <label for="description">説明</label>
       <textarea id="description" type="text" v-model="state.description"></textarea>
     </div>
+    <div class="pure-control-group">
+      <label for="description">非公開にする</label>
+      <input id="description" type="checkbox" v-model="state.isPrivate">
+    </div>
     <div class="pure-controls">
       <button class="pure-button pure-button-primary">作成</button>
     </div>

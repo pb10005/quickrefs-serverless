@@ -23,7 +23,8 @@ const onSubmit = () => {
 };
 
 const onTagSelected = (tagId) => {
-  axios.get(`/KnowledgeTags/findByTag/${tagId}`)
+  const sessionId = localStorage.getItem("sessionId");
+  axios.get(`/KnowledgeTags/findByTag/${tagId}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
     .then(docs => {
       state.knowledges = docs.data;
     });
@@ -35,11 +36,10 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    <h2>タグ</h2>
     <a class="button-small pure-button pure-button-primary" @click="state.isCreateTagFormVisible ^= true">タグを登録する</a>
+    <h3>タグで検索する</h3>
     <add-tag-form v-if="state.isCreateTagFormVisible  " @submit="onSubmit"></add-tag-form>
     <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
     <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
   </div>
 </template>
-

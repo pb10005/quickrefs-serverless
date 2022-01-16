@@ -20,7 +20,8 @@ const state = reactive({
 });
 
 const fetchKnowledges = () => {
-  axios.get(`/knowledges/${route.params.id}`)
+  const sessionId = localStorage.getItem("sessionId");
+  axios.get(`/knowledges/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
           .then(doc => {
             state.name = doc.data.name;
             state.description = doc.data.description;
@@ -73,6 +74,7 @@ onMounted(() => {
 }
 .container {
   padding: 5px;
+  
 }
 
 </style>

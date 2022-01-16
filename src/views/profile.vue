@@ -29,6 +29,7 @@ axios.get("/users/profile", { headers: { sessionId: `quickrefs:sessionId:${sessi
   <h2>プロフィール</h2>
   <not-logged-in-card v-if="!state.isLoggedIn"></not-logged-in-card>
   <p>{{state.profile.screenName}}</p>
+  <h3>あなたのナレッジ</h3>
   <knowledge-list :knowledgeList="state.userKnowledges"></knowledge-list>
 </template>
 
