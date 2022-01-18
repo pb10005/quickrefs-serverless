@@ -15,6 +15,7 @@ const state = reactive({
   description: "",
   list: [],
   tags: [],
+  owners: [],
   isAddTagFormVisible: false,
   isAddReferenceFormVisible: false
 });
@@ -25,6 +26,10 @@ const fetchKnowledges = () => {
           .then(doc => {
             state.name = doc.data.name;
             state.description = doc.data.description;
+            return axios.get(`/userknowledges/findbyknowledge/${route.params.id}`)
+          })
+          .then(doc => {
+            state.owners = doc.data;
             return axios.get(`/references/findbyknowledge/${route.params.id}`);
           })
           .then(doc => {
@@ -50,6 +55,7 @@ onMounted(() => {
     <h2>
       {{state.name}}
     </h2>
+    <h3>作成者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
     <p>
       {{state.description}}
     </p>
