@@ -27,7 +27,7 @@ const login = () => {
       <fieldset>
         <legend>ログイン</legend>
         <div class="pure-control-group">
-          <label for="id">Id</label>
+          <label for="id">ID</label>
           <input id="id" type="text" placeholder="Id" v-model="state.id">
         </div>
         <div class="pure-control-group">
