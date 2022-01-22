@@ -36,6 +36,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
+    <router-link class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成する</router-link>
     <a class="button-small pure-button pure-button-primary" @click="state.isCreateTagFormVisible ^= true">タグを登録する</a>
     <h3>タグで検索する</h3>
     <add-tag-form v-if="state.isCreateTagFormVisible  " @submit="onSubmit"></add-tag-form>

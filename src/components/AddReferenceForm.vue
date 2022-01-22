@@ -14,12 +14,13 @@ const state = reactive({
 });
 
 const sendData = () => {
+  const sessionId = localStorage.getItem("sessionId");
   axios.post("/References", {
     name: state.name,
     description: state.description,
     knowledgeId: route.params.id,
     url: state.url
-  }).then(() => {
+  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`} }).then(() => {
     state.name = "";
     state.description = "";
     state.url = "";
