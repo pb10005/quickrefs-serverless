@@ -19,7 +19,7 @@ const signup = () => {
   }).then(() => {
     router.push("/signup/complete");
   }).catch(err => {
-    errMsg.value = err.message;
+    errMsg.value = err.response.data;
   });
 };
 

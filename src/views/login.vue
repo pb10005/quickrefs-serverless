@@ -19,7 +19,7 @@ const login = () => {
     localStorage.setItem("sessionId", doc.data);
     router.push("/profile");
   }).catch(err => {
-    errMsg.value = err.message;
+    errMsg.value = err.response.data;
   });
 };
 </script>

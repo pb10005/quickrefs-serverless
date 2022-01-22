@@ -12,7 +12,8 @@ const state = reactive({
 });
 
 const fetchTags = () => {
-  axios.get('/Tags')
+  const sessionId = localStorage.getItem("sessionId");
+  axios.get('/Tags', { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
     .then(docs => {
       state.tags = docs.data;
     });
@@ -37,9 +38,9 @@ onMounted(() => {
 <template>
   <div>
     <router-link class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成する</router-link>
-    <a class="button-small pure-button pure-button-primary" @click="state.isCreateTagFormVisible ^= true">タグを登録する</a>
+    <!-- <a class="button-small pure-button pure-button-primary" @click="state.isCreateTagFormVisible ^= true">タグを登録する</a> -->
     <h3>タグで検索する</h3>
-    <add-tag-form v-if="state.isCreateTagFormVisible  " @submit="onSubmit"></add-tag-form>
+    <!-- <add-tag-form v-if="state.isCreateTagFormVisible  " @submit="onSubmit"></add-tag-form> -->
     <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
     <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
   </div>

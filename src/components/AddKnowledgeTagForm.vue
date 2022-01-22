@@ -12,13 +12,26 @@ const state = reactive({
 });
 
 const sendData = () => {
+  const sessionId = localStorage.getItem("sessionId");
   axios.get(`/Tags/findbyname/${state.name}`)
     .then(doc => {
-      axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}).then(() => {
+      // すでにタグが存在する場合
+      axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => {
         state.name = "";
         emit("submit");
       });
-    }).catch(err => {console.log(err.message);});
+    }).catch(err => {
+      if(err.response.status == 404) {
+        axios.post("/Tags", {name : state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => {
+          return axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
+        }).then(() => {
+            state.name = "";
+            emit("submit");
+          });;
+      } else {
+        alert(err.response.status);
+      }
+    });
 };
 </script>
 <template>
