@@ -1,13 +1,15 @@
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "../http_client.js";
+import ErrorCard from "../components/ErrorCard.vue";
 
 const router = useRouter();
 const state = reactive({
  id: "",
  password: ""
 });
+const errMsg = ref("");
 
 const login = () => {
   axios.post("/auth/login", {
@@ -16,6 +18,8 @@ const login = () => {
   }).then(doc => {
     localStorage.setItem("sessionId", doc.data);
     router.push("/profile");
+  }).catch(err => {
+    errMsg.value = err.message;
   });
 };
 </script>
@@ -23,6 +27,7 @@ const login = () => {
 <template>
   <div class="px">
     <div class="">
+    <error-card v-if="errMsg" :message="errMsg" />
     <form @submit.prevent="login" class="pure-form pure-form-aligned">
       <fieldset>
         <legend>ログイン</legend>
