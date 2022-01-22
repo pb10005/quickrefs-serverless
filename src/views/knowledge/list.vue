@@ -1,7 +1,7 @@
 <script setup>
-import KnowledgeList from "../components/KnowledgeList.vue";
-import NotLoggedInCard from "../components/NotLoggedInCard.vue";
-import axios from "../http_client.js";
+import KnowledgeList from "../../components/KnowledgeList.vue";
+import NotLoggedInCard from "../../components/NotLoggedInCard.vue";
+import axios from "../../http_client.js";
 import { reactive } from "@vue/reactivity";
 
 const state = reactive({

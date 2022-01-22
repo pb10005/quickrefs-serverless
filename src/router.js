@@ -4,10 +4,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import index from './views/index.vue';
 import login from './views/login.vue';
-import signup from './views/signup.vue';
-import knowledge_list from './views/knowledge_list.vue';
-import knowledge from './views/knowledge.vue';
-import knowledge_add from './views/knowledge_add.vue';
+import signup from './views/signup/index.vue';
+import signup_complete from './views/signup/complete.vue';
+import knowledge_list from './views/knowledge/list.vue';
+import knowledge from './views/knowledge/index.vue';
+import knowledge_add from './views/knowledge/add.vue';
 import profile from './views/profile.vue';
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/signup',
     component: signup
+  },
+  {
+    path: '/signup/complete',
+    component: signup_complete
   },
   {
      path: '/knowledge/list',
