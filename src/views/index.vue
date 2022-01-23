@@ -3,10 +3,12 @@ import { onMounted, reactive } from 'vue';
 import TagList from '../components/TagList.vue';
 import AddTagForm from '../components/AddTagForm.vue';
 import KnowledgeList from '../components/KnowledgeList.vue';
+import NotLoggedInCard from '../components/NotLoggedInCard.vue';
 import axios from '../http_client.js';
 
 const state = reactive({
   tags: [],
+  isLoggedIn: false,
   knowledges: [],
   isCreateTagFormVisible: false
 });
@@ -32,16 +34,21 @@ const onTagSelected = (tagId) => {
 };
 
 onMounted(() => {
+  state.isLoggedIn = localStorage.getItem("sessionId") ? true : false;
   fetchTags();
 });
 </script>
 <template>
-  <div>
-    <router-link class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成する</router-link>
-    <!-- <a class="button-small pure-button pure-button-primary" @click="state.isCreateTagFormVisible ^= true">タグを登録する</a> -->
-    <h3>タグで検索する</h3>
-    <!-- <add-tag-form v-if="state.isCreateTagFormVisible  " @submit="onSubmit"></add-tag-form> -->
-    <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
-    <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h2>Quick Refs</h2>
+      <not-logged-in-card v-if="!state.isLoggedIn"/>
+      <router-link v-else class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成する</router-link>
+    </div>
+    <div class="pure-u-1">
+      <h3>タグで検索する</h3>
+      <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
+      <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
+    </div>
   </div>
 </template>

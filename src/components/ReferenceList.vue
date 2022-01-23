@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, defineProps, defineEmits } from "vue";
+import axios from "../http_client.js";
 import EditReferenceForm from "./EditReferenceForm.vue";
 
 const state = reactive({
@@ -15,6 +16,12 @@ defineProps({
 const editItem = (reference) => {
   state.reference = reference;
   state.isEditMode = true;
+};
+
+const deleteItem = ({ id }) => {
+  const sessionId = localStorage.getItem("sessionId");
+  axios.delete(`/references/${id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
+    .then(emit("submit"));
 };
 
 const onSubmit = () => {
@@ -37,9 +44,24 @@ const onSubmit = () => {
         <div class="panel-footer">
           <a v-if="item.url" class="button-small pure-button" target="_blank" :href="item.url">表示</a>
           <button @click="editItem(item)" class="button-small pure-button">編集</button>
+          <button @click="deleteItem(item)" class="button-small pure-button">削除</button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
+<style scoped>
+.panel {
+  background: #f0f0f0;
+  margin: 5px 5px 0 5px;
+  padding: 5px;
+  min-height: 100px;
+  border-radius: 3px;
+}
+.panel-header {
+  padding: 5px 0;
+}
+.panel-body {
+  padding: 10px 5px;
+}
+</style>
