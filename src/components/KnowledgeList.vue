@@ -34,5 +34,6 @@ defineProps({
 }
 .panel-body {
   padding: 10px 5px;
+  white-space: pre-wrap;
 }
 </style>
