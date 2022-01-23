@@ -37,7 +37,7 @@ const onSubmit = () => {
       <div class="pure-u-sm-1-3 pure-u-md-1-4" v-for="item in referenceList" :key="item">
         <div v-show="!state.isEditMode" class="panel">
           <div class="panel-header">
-            <span>{{item.name}}</span>
+            <strong>{{item.name}}</strong>
           </div>
           <div class="panel-body">
             <small v-if="item.description">{{item.description}}</small>
