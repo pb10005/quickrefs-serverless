@@ -18,13 +18,21 @@ const state = reactive({
   tags: [],
   owners: [],
   isAddTagFormVisible: false,
-  isAddReferenceFormVisible: false
+  isAddReferenceFormVisible: false,
+  isOwner: false
 });
 
 const errMsg = ref("");
 
 const fetchKnowledges = () => {
   const sessionId = localStorage.getItem("sessionId");
+  axios.get(`/knowledges/check/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
+    .then(doc => {
+      if(doc.data === 2)
+      {
+        state.isOwner = true;
+      }
+    });
   axios.get(`/knowledges/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
           .then(doc => {
             state.name = doc.data.name;
@@ -67,14 +75,14 @@ onMounted(() => {
       <p>
         {{state.description}}
       </p>
-      <a class="button-small pure-button pure-button-primary" @click="state.isEditMode = true">編集</a>
+      <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isEditMode = true">編集</a>
     </div>
     <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
     <div class="container">
       <tag-list :tags="state.tags"></tag-list>
     </div>
-    <a class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
-    <a class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
+    <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
+    <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
     <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
     <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
     <div class="container">
