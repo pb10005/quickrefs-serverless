@@ -10,7 +10,8 @@ const state = reactive({
 
 const emit = defineEmits();
 defineProps({
- referenceList: []
+  isOwner: false,
+  referenceList: []
 });
 
 const editItem = (reference) => {
@@ -44,8 +45,8 @@ const onSubmit = () => {
           </div>
           <div class="panel-footer">
             <a v-if="item.url" class="button-small pure-button" target="_blank" :href="item.url">表示</a>
-            <button @click="editItem(item)" class="button-small pure-button">編集</button>
-            <button @click="deleteItem(item)" class="button-small pure-button">削除</button>
+            <button v-if="isOwner" @click="editItem(item)" class="button-small pure-button">編集</button>
+            <button v-if="isOwner" @click="deleteItem(item)" class="button-small pure-button">削除</button>
           </div>
         </div>
       </div>

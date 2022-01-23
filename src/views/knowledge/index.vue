@@ -86,7 +86,7 @@ onMounted(() => {
     <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
     <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
     <div class="container">
-      <reference-list :referenceList="state.list" @submit="onSubmit"></reference-list>
+      <reference-list :isOwner="state.isOwner" :referenceList="state.list" @submit="onSubmit"></reference-list>
     </div>
   </div>
 </template>
