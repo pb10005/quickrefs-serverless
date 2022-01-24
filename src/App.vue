@@ -24,6 +24,9 @@
   <div class="container"> 
     <router-view/>
   </div>
+  <footer>
+    これはサンドボックス環境です。すべてのデータは予告なく削除される可能性があります。
+  </footer>
 </template>
 
 <style>
