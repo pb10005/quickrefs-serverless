@@ -8,10 +8,10 @@
         <router-link to="/" class="pure-menu-link">Home</router-link>
     </li>
     <li class="pure-menu-item">
-        <router-link to="/profile" class="pure-menu-link">プロフィール</router-link>
+        <router-link to="/knowledge/list" class="pure-menu-link">ナレッジ</router-link>
     </li>
     <li class="pure-menu-item">
-        <router-link to="/knowledge/list" class="pure-menu-link">ナレッジ</router-link>
+        <router-link to="/profile" class="pure-menu-link">プロフィール</router-link>
     </li>
     <li class="pure-menu-item">
         <router-link to="/login" class="pure-menu-link">ログイン</router-link>
