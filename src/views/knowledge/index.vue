@@ -5,7 +5,7 @@ import axios from "../../http_client.js";
 import ReferenceList from "../../components/ReferenceList.vue";
 import AddReferenceForm from "../../components/AddReferenceForm.vue";
 import AddKnowledgeTagForm from "../../components/AddKnowledgeTagForm.vue";
-import TagList from "../../components/TagList.vue";
+import KnowledgeTagList from "../../components/KnowledgeTagList.vue";
 import EditKnowledgeForm from "../../components/EditKnowledgeForm.vue";
 import ErrorCard from "../../components/ErrorCard.vue";
 
@@ -59,6 +59,12 @@ const onSubmit = () => {
   fetchKnowledges();
 };
 
+const deleteTag = (tagId) => {
+  const sessionId = localStorage.getItem("sessionId");
+  axios.delete(`/knowledgeTags/${route.params.id}/${tagId}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
+    .then(onSubmit);
+};
+
 onMounted(() => {
   fetchKnowledges();
 });
@@ -79,7 +85,7 @@ onMounted(() => {
     </div>
     <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
     <div class="container">
-      <tag-list :tags="state.tags"></tag-list>
+      <knowledge-tag-list :isOwner="state.isOwner" :tags="state.tags" @onTagDeleteButtonPressed="deleteTag"></knowledge-tag-list>
     </div>
     <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
     <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
