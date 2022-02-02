@@ -71,28 +71,30 @@ onMounted(() => {
 </script>
 
 <template>
-  <error-card v-if="errMsg" :message="errMsg"/>
-  <div v-else>
-    <div v-show="!state.isEditMode">
-      <h2>
-        {{state.name}}
-      </h2>
-      <h3>作成者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
-      <p>
-        {{state.description}}
-      </p>
-      <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isEditMode = true">編集</a>
-    </div>
-    <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
-    <div class="container">
-      <knowledge-tag-list :isOwner="state.isOwner" :tags="state.tags" @onTagDeleteButtonPressed="deleteTag"></knowledge-tag-list>
-    </div>
-    <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
-    <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
-    <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
-    <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
-    <div class="container">
-      <reference-list :isOwner="state.isOwner" :referenceList="state.list" @submit="onSubmit"></reference-list>
+  <div>
+    <error-card v-if="errMsg" :message="errMsg"/>
+    <div v-else>
+      <div v-show="!state.isEditMode">
+        <h2>
+          {{state.name}}
+        </h2>
+        <h3>作成者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
+        <p>
+          {{state.description}}
+        </p>
+        <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isEditMode = true">編集</a>
+      </div>
+      <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
+      <div class="container">
+        <knowledge-tag-list :isOwner="state.isOwner" :tags="state.tags" @onTagDeleteButtonPressed="deleteTag"></knowledge-tag-list>
+      </div>
+      <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
+      <a v-if="state.isOwner" class="button-small pure-button pure-button-primary" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
+      <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
+      <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
+      <div class="container">
+        <reference-list :isOwner="state.isOwner" :referenceList="state.list" @submit="onSubmit"></reference-list>
+      </div>
     </div>
   </div>
 </template>

@@ -45,18 +45,20 @@ const editProfile = (profile) => {
 };
 </script>
 <template>
-  <h2>プロフィール</h2>
-  <not-logged-in-card v-if="!state.isLoggedIn"></not-logged-in-card>
-  <div v-else>
-    <div v-show="state.isEditProfileMode">
-      <edit-profile-form :profile="state.profile" @submit="editProfile" @cancel="state.isEditProfileMode = false"></edit-profile-form>
+  <div>
+    <h2>プロフィール</h2>
+    <not-logged-in-card v-if="!state.isLoggedIn"></not-logged-in-card>
+    <div v-else>
+      <div v-show="state.isEditProfileMode">
+        <edit-profile-form :profile="state.profile" @submit="editProfile" @cancel="state.isEditProfileMode = false"></edit-profile-form>
+      </div>
+      <div v-show="!state.isEditProfileMode">
+        <p>{{state.profile.screenName}}</p>
+        <a class="button-small pure-button pure-button-primary" @click="state.isEditProfileMode = true">編集</a>
+      </div>
+      <h3>あなたのナレッジ</h3>
+      <knowledge-list :knowledgeList="state.userKnowledges"></knowledge-list>
     </div>
-    <div v-show="!state.isEditProfileMode">
-      <p>{{state.profile.screenName}}</p>
-      <a class="button-small pure-button pure-button-primary" @click="state.isEditProfileMode = true">編集</a>
-    </div>
-    <h3>あなたのナレッジ</h3>
-    <knowledge-list :knowledgeList="state.userKnowledges"></knowledge-list>
   </div>
 </template>
 
