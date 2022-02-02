@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, defineEmits, defineProps } from "vue";
+import { onMounted, reactive } from "vue";
 import axios from "../http_client.js";
 
 const state = reactive({
@@ -50,7 +50,7 @@ const cancel = () => {
         </div>
         <div class="pure-controls">
           <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-          <button @click.prevent="submit" class="pure-button pure-button-primary">登録</button>
+          <button @click.prevent="submit" class="pure-button bg-main text-white">登録</button>
         </div>
       </fieldset>
     </form>

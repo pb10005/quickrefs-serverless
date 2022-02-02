@@ -11,18 +11,17 @@ const emit = defineEmits(['onTagDeleteButtonPressed']);
 </script>
 <template>
   <div>
-    <span class="tag" v-for="tag in props.tags" :key="tag"> 
+    <span class="tag bg-secondary text-white" v-for="tag in props.tags" :key="tag"> 
       <span class="tag-box">
         {{tag.name}}
       </span>
-      <button v-if="props.isOwner" @click="emit('onTagDeleteButtonPressed', tag.id)" class="delete-button">×</button>
+      <button v-if="props.isOwner" @click="emit('onTagDeleteButtonPressed', tag.id)" class="bg-base delete-button">×</button>
     </span>
   </div>
 </template>
 <style scoped>
 .tag {
   margin: 10px 5px;
-  background-color: #f0f0f0;
   display: inline-block;
   height: fit-content;
   padding-right: 5px;
@@ -34,6 +33,8 @@ const emit = defineEmits(['onTagDeleteButtonPressed']);
 }
 .delete-button {
   font-weight: 700;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
   border-radius: 50%;
   border-width: 0;

@@ -41,9 +41,9 @@ onMounted(() => {
 <template>
   <div class="pure-g">
     <div class="pure-u-1">
-      <h2>Quick Refs</h2>
+      <h2 class="text-main">Quick Refs</h2>
       <not-logged-in-card v-if="!state.isLoggedIn"/>
-      <router-link v-else class="button-small pure-button pure-button-primary" to="/knowledge/add">ナレッジを新規作成</router-link>
+      <router-link v-else class="button-small pure-button bg-main text-white" to="/knowledge/add">ナレッジを新規作成</router-link>
     </div>
     <div class="pure-u-1">
       <h3>タグで検索する</h3>

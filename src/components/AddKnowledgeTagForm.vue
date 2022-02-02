@@ -43,7 +43,7 @@ const sendData = () => {
         <input id="name" type="text" v-model="state.name" required>
       </div>
       <div class="pure-controls">
-        <button class="pure-button pure-button-primary">追加</button>
+        <button class="pure-button bg-main text-white">追加</button>
       </div>
     </fieldset>
   </form>

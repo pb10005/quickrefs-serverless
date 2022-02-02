@@ -57,7 +57,7 @@ onMounted(() => {
     </div>
     <div class="pure-controls">
       <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-      <button class="pure-button pure-button-primary">確定</button>
+      <button class="pure-button bg-main text-white">確定</button>
     </div>
     </fieldset>
   </form>

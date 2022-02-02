@@ -45,7 +45,7 @@ const sendData = () => {
         <input id="url" type="text" v-model="state.url">
       </div>
       <div class="pure-controls">
-        <button class="pure-button pure-button-primary">作成</button>
+        <button class="pure-button bg-main text-white">作成</button>
       </div>
     </fieldset>
   </form>

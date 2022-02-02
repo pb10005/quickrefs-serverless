@@ -64,7 +64,7 @@ const sendData = () => {
       </div>
       <div class="pure-controls">
         <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-        <button @click.prevent="sendData" class="pure-button pure-button-primary">編集</button>
+        <button @click.prevent="sendData" class="pure-button bg-main text-white">編集</button>
       </div>
     </fieldset>
   </form>

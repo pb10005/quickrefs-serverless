@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="pure-menu pure-menu-horizontal">
+  <div class="bg-base pure-menu pure-menu-horizontal">
   <div class="pure-menu-list">
     <li class="pure-menu-item">
         <router-link to="/" class="pure-menu-link">Home</router-link>
@@ -21,13 +21,13 @@
     </li>
   </div>
   </div>
-  <div class="container"> 
+  <div class="bg-base"> 
     <div class="pure-g">
-      <div class="background pure-u-md-1-6">&nbsp;</div>
+      <div class="pure-u-md-1-6">&nbsp;</div>
       <div class="pure-u-md-2-3 pure-u-1 ">
         <router-view class="main"/>
       </div>
-      <div class="background pure-u-md-1-6">&nbsp;</div>
+      <div class="bg-base pure-u-md-1-6">&nbsp;</div>
     </div>
   </div>
   <footer>
@@ -41,9 +41,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.container {
-  padding: 5px;
-}
 .button-small {
   font-size: 80%;
 }
@@ -51,7 +48,22 @@
   padding: 10px;
   min-height: 100vh;
 }
-.background {
-  background-color: #f0f0f0;
+.text-white {
+  color: #ffffff;
+}
+.bg-base {
+  background-color: #f6f6e9;
+}
+.bg-main {
+  background-color: #005792;
+}
+.bg-secondary {
+  background-color: #13334c;
+}
+.bg-accent {
+  background-color: #fd5f00;
+}
+.text-main {
+  color: #005792;
 }
 </style>

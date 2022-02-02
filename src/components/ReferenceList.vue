@@ -35,7 +35,7 @@ const onSubmit = () => {
   <div class="">
     <div class="">
       <edit-reference-form :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
-      <div class="pure-u-sm-1-3 pure-u-md-1-4" v-for="item in referenceList" :key="item">
+      <div class="pure-u-sm-1-2 pure-u-lg-1-3 pure-u-xl-1-4" v-for="item in referenceList" :key="item">
         <div v-show="!state.isEditMode" class="panel">
           <div class="panel-header">
             <strong>{{item.name}}</strong>
@@ -44,9 +44,9 @@ const onSubmit = () => {
             <small v-if="item.description">{{item.description}}</small>
           </div>
           <div class="panel-footer">
-            <a v-if="item.url" class="button-small pure-button" target="_blank" :href="item.url">表示</a>
-            <button v-if="isOwner" @click="editItem(item)" class="button-small pure-button">編集</button>
-            <button v-if="isOwner" @click="deleteItem(item)" class="button-small pure-button">削除</button>
+            <a v-if="item.url" class="button-small pure-button bg-main text-white" target="_blank" :href="item.url">表示</a>
+            <button v-if="isOwner" @click="editItem(item)" class="button-small pure-button bg-main text-white">編集</button>
+            <button v-if="isOwner" @click="deleteItem(item)" class="button-small pure-button bg-accent text-white">削除</button>
           </div>
         </div>
       </div>
@@ -55,7 +55,6 @@ const onSubmit = () => {
 </template>
 <style scoped>
 .panel {
-  background: #f0f0f0;
   margin: 5px 5px 0 5px;
   padding: 5px;
   border-radius: 3px;
