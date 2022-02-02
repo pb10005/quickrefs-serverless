@@ -24,7 +24,7 @@
   <div class="container"> 
     <div class="pure-g">
       <div class="background pure-u-md-1-6">&nbsp;</div>
-      <div class="pure-u-md-2-3 pure-u-sm-1 ">
+      <div class="pure-u-md-2-3 pure-u-1 ">
         <router-view class="main"/>
       </div>
       <div class="background pure-u-md-1-6">&nbsp;</div>
