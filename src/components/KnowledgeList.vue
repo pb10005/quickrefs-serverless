@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from "vue";
 
 defineProps({
   knowledgeList: []
@@ -26,7 +25,6 @@ defineProps({
   background: #f0f0f0;
   margin: 5px 5px 0 5px;
   padding: 5px;
-  min-height: 100px;
   border-radius: 3px;
 }
 .panel-header {
@@ -35,5 +33,6 @@ defineProps({
 .panel-body {
   padding: 10px 5px;
   white-space: pre-wrap;
+  min-height: 30px;
 }
 </style>

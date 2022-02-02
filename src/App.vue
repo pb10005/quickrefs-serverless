@@ -22,7 +22,13 @@
   </div>
   </div>
   <div class="container"> 
-    <router-view/>
+    <div class="pure-g">
+      <div class="background pure-u-md-1-6">&nbsp;</div>
+      <div class="pure-u-md-2-3 pure-u-sm-1 ">
+        <router-view class="main"/>
+      </div>
+      <div class="background pure-u-md-1-6">&nbsp;</div>
+    </div>
   </div>
   <footer>
     これはサンドボックス環境です。すべてのデータは予告なく削除される可能性があります。
@@ -40,5 +46,12 @@
 }
 .button-small {
   font-size: 80%;
+}
+.main {
+  padding: 10px;
+  min-height: 100vh;
+}
+.background {
+  background-color: #f0f0f0;
 }
 </style>

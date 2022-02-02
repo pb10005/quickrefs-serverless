@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, defineProps, defineEmits } from "vue";
+import { reactive } from "vue";
 import axios from "../http_client.js";
 import EditReferenceForm from "./EditReferenceForm.vue";
 
@@ -58,7 +58,6 @@ const onSubmit = () => {
   background: #f0f0f0;
   margin: 5px 5px 0 5px;
   padding: 5px;
-  min-height: 100px;
   border-radius: 3px;
 }
 .panel-header {
@@ -67,5 +66,6 @@ const onSubmit = () => {
 .panel-body {
   padding: 10px 5px;
   white-space: pre-wrap;
+  min-height: 30px;
 }
 </style>

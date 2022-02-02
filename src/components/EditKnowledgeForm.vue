@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, defineProps, defineEmits } from "vue";
+import { onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "../http_client.js";
 

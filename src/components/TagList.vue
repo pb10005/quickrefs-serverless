@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, defineProps, defineEmits } from 'vue';
+import { reactive } from 'vue';
 import axios from '../http_client.js';
 
 const props = defineProps({
