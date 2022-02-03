@@ -33,6 +33,7 @@ defineProps({
   margin: 5px 5px 0 5px;
   padding: 5px;
   border-radius: 3px;
+  background-color: #ffffff;
 }
 .panel-header {
   padding: 5px 0;

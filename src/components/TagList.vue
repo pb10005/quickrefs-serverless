@@ -11,13 +11,14 @@ const emit = defineEmits(['onTagSelected']);
 </script>
 <template>
   <div>
-    <span class="tag" v-for="tag in props.tags" :key="tag"> 
+    <div class="tag" v-for="tag in props.tags" :key="tag"> 
       <button class="button-large pure-button bg-secondary text-white" @click="emit('onTagSelected', tag.id)">{{tag.name}}</button>
-    </span>
+    </div>
   </div>
 </template>
 <style scoped>
 .tag {
+  display: inline-block;
   margin: 10px 5px;
 }
 </style>

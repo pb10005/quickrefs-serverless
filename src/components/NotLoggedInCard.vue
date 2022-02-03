@@ -9,7 +9,6 @@
 <style scoped>
 .card {
   padding: 10px;
-  background: #f0f0f0;
 }
 </style>
 
