@@ -35,7 +35,7 @@ const onSubmit = () => {
   <div class="">
     <div class="">
       <edit-reference-form :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
-      <div class="pure-u-sm-1-2 pure-u-lg-1-3 pure-u-xl-1-4" v-for="item in referenceList" :key="item">
+      <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in referenceList" :key="item">
         <div v-show="!state.isEditMode" class="panel">
           <div class="panel-header">
             <strong>{{item.name}}</strong>

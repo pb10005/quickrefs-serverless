@@ -11,7 +11,7 @@ defineProps({
 
 </script>
 <template>
-    <div class="pure-u-sm-1-2 pure-u-lg-1-3 pure-u-xl-1-4" v-for="item in knowledgeList" :key="item">
+    <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in knowledgeList" :key="item">
       <div class="panel bg-base">
         <div class="panel-header">
           <strong>{{item.name}}</strong>
