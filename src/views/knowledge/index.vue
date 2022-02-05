@@ -8,6 +8,7 @@ import AddKnowledgeTagForm from "../../components/AddKnowledgeTagForm.vue";
 import KnowledgeTagList from "../../components/KnowledgeTagList.vue";
 import EditKnowledgeForm from "../../components/EditKnowledgeForm.vue";
 import ErrorCard from "../../components/ErrorCard.vue";
+import ChangeOwnerForm from "../../components/ChangeOwnerForm.vue";
 
 const route = useRoute();
 const state = reactive({
@@ -19,6 +20,7 @@ const state = reactive({
   owners: [],
   isAddTagFormVisible: false,
   isAddReferenceFormVisible: false,
+  isChangeOwnerFormVisible: false,
   isOwner: false
 });
 
@@ -31,6 +33,8 @@ const fetchKnowledges = () => {
       if(doc.data === 2)
       {
         state.isOwner = true;
+      } else {
+        state.isOwner = false;
       }
     });
   axios.get(`/knowledges/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
@@ -57,6 +61,9 @@ const fetchKnowledges = () => {
 
 const onSubmit = () => {
   fetchKnowledges();
+  state.isAddReferenceFormVisible = false;
+  state.isAddTagFormVisible = false;
+  state.isChangeOwnerFormVisible = false;
 };
 
 const deleteTag = (tagId) => {
@@ -78,7 +85,7 @@ onMounted(() => {
         <h2 class="text-main">
           {{state.name}}
         </h2>
-        <h3>作成者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
+        <h3>所有者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
         <p>
           {{state.description}}
         </p>
@@ -88,10 +95,12 @@ onMounted(() => {
       <div class="container">
         <knowledge-tag-list :isOwner="state.isOwner" :tags="state.tags" @onTagDeleteButtonPressed="deleteTag"></knowledge-tag-list>
       </div>
-      <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isAddTagFormVisible ^= true">タグを追加する</a>
-      <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加する</a>
-      <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="fetchKnowledges"></add-knowledge-tag-form>
-      <add-reference-form @submit="fetchKnowledges" v-show="state.isAddReferenceFormVisible"></add-reference-form>
+      <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isAddTagFormVisible ^= true">タグを追加</a>
+      <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加</a>
+      <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isChangeOwnerFormVisible ^= true">所有者を移転</a>
+      <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="onSubmit"></add-knowledge-tag-form>
+      <add-reference-form @submit="onSubmit" v-show="state.isAddReferenceFormVisible"></add-reference-form>
+      <change-owner-form @submit="onSubmit" v-show="state.isChangeOwnerFormVisible"></change-owner-form>
       <div class="container">
         <reference-list :isOwner="state.isOwner" :referenceList="state.list" @submit="onSubmit"></reference-list>
       </div>
