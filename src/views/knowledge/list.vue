@@ -23,7 +23,7 @@ axios.get(`/knowledges`)
 <template>
   <div class="pure-g">
     <div class="pure-u-1">
-      <h2 class="text-main">公開されたナレッジ</h2>
+      <h2 class="text-headline">公開されたナレッジ</h2>
       <not-logged-in-card v-if="!state.isLoggedIn"/>
       <router-link v-else class="button-small pure-button bg-main text-white" to="/knowledge/add">ナレッジを新規作成</router-link>
     </div>

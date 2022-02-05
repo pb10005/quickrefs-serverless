@@ -36,11 +36,11 @@ const onSubmit = () => {
     <div class="">
       <edit-reference-form :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
       <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in referenceList" :key="item">
-        <div v-show="!state.isEditMode" class="panel">
-          <div class="panel-header">
+        <div v-show="!state.isEditMode" class="panel bg-card">
+          <div class="panel-header text-card-headline">
             <strong>{{item.name}}</strong>
           </div>
-          <div class="panel-body">
+          <div class="panel-body text-card-paragraph">
             <small v-if="item.description">{{item.description}}</small>
           </div>
           <div class="panel-footer">
@@ -58,7 +58,6 @@ const onSubmit = () => {
   margin: 5px 5px 0 5px;
   padding: 5px;
   border-radius: 3px;
-  background-color: #ffffff;
 }
 .panel-header {
   padding: 5px 0;

@@ -30,7 +30,7 @@ const login = () => {
     <error-card v-if="errMsg" :message="errMsg" />
     <form @submit.prevent="login" class="pure-form pure-form-aligned">
       <fieldset>
-        <legend class="text-main">ログイン</legend>
+        <legend class="text-headline">ログイン</legend>
         <div class="pure-control-group">
           <label for="id">ID</label>
           <input id="id" type="text" placeholder="Id" v-model="state.id">

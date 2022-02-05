@@ -82,11 +82,11 @@ onMounted(() => {
     <error-card v-if="errMsg" :message="errMsg"/>
     <div v-else>
       <div v-show="!state.isEditMode">
-        <h2 class="text-main">
+        <h2 class="text-headline">
           {{state.name}}
         </h2>
-        <h3>所有者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
-        <p>
+        <h3 class="text-headline">所有者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span></h3>
+        <p class="text-paragraph">
           {{state.description}}
         </p>
         <a v-if="state.isOwner" class="button-small pure-button bg-main text-white" @click="state.isEditMode = true">編集</a>

@@ -30,7 +30,7 @@ const signup = () => {
     <error-card v-if="errMsg" :message="errMsg"></error-card>
     <form @submit.prevent="signup" class="pure-form pure-form-aligned">
       <fieldset>
-        <legend class="text-main">新規登録</legend>
+        <legend class="text-headline">新規登録</legend>
         <div class="pure-control-group">
           <label for="id">ID</label>
           <input id="id" type="text" placeholder="Id" v-model="state.id" required><br>

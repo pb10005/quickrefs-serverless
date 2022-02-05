@@ -12,18 +12,18 @@ defineProps({
 </script>
 <template>
     <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in knowledgeList" :key="item">
-      <div class="panel bg-base">
-        <div class="panel-header">
+      <div class="panel bg-card">
+        <div class="panel-header text-card-heading">
           <strong>{{item.name}}</strong>
         </div>
-        <div>
+        <div class="text-card-paragraph">
           <small>最終更新日: {{displayDateTime(item.updatedAt)}}</small>
         </div>
-        <div class="panel-body">
+        <div class="panel-body text-card-paragraph">
           <small>{{item.description}}</small>
         </div>
         <div class="panel-footer">
-          <router-link class="button-small pure-button bg-main text-white" :to="`/knowledge/view/${item.id}`">詳細</router-link>
+          <router-link class="button-small pure-button" :to="`/knowledge/view/${item.id}`">詳細</router-link>
         </div>
       </div>
     </div>
@@ -33,7 +33,6 @@ defineProps({
   margin: 5px 5px 0 5px;
   padding: 5px;
   border-radius: 3px;
-  background-color: #ffffff;
 }
 .panel-header {
   padding: 5px 0;

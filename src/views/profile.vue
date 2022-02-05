@@ -46,7 +46,7 @@ const editProfile = (profile) => {
 </script>
 <template>
   <div>
-    <h2 class="text-main">プロフィール</h2>
+    <h2 class="text-headline">プロフィール</h2>
     <not-logged-in-card v-if="!state.isLoggedIn"></not-logged-in-card>
     <div v-else>
       <div v-show="state.isEditProfileMode">
@@ -54,9 +54,12 @@ const editProfile = (profile) => {
       </div>
       <div v-show="!state.isEditProfileMode">
         <p>{{state.profile.screenName}}</p>
-        <a class="button-small pure-button bg-main text-white" @click="state.isEditProfileMode = true">編集</a>
+        <a class="button-small pure-button" @click="state.isEditProfileMode = true">編集</a>
       </div>
-      <h3>あなたのナレッジ</h3>
+      <h3 class="text-headline">あなたのナレッジ</h3>
+      <div>
+        <router-link class="button-small pure-button" to="/knowledge/add">ナレッジを新規作成</router-link>
+      </div>
       <knowledge-list :knowledgeList="state.userKnowledges"></knowledge-list>
     </div>
   </div>

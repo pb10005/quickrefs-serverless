@@ -11,7 +11,7 @@ const emit = defineEmits(['onTagDeleteButtonPressed']);
 </script>
 <template>
   <div>
-    <span class="tag bg-secondary text-white" v-for="tag in props.tags" :key="tag"> 
+    <span class="tag bg-tertiary" v-for="tag in props.tags" :key="tag"> 
       <div class="tag-box">
         {{tag.name}}
       </div>
@@ -39,7 +39,6 @@ const emit = defineEmits(['onTagDeleteButtonPressed']);
   font-weight: 700;
   cursor: pointer;
   background-color: transparent;
-  color: #ffffff;
   border-width: 0;
 }
 </style>
