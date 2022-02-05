@@ -46,9 +46,9 @@ const editProfile = (profile) => {
 </script>
 <template>
   <div>
-    <h2 class="text-headline">プロフィール</h2>
     <not-logged-in-card v-if="!state.isLoggedIn"></not-logged-in-card>
     <div v-else>
+      <h3 class="text-headline">プロフィール</h3>
       <div v-show="state.isEditProfileMode">
         <edit-profile-form :profile="state.profile" @submit="editProfile" @cancel="state.isEditProfileMode = false"></edit-profile-form>
       </div>

@@ -16,9 +16,6 @@
     <li class="pure-menu-item">
         <router-link to="/profile" class="pure-menu-link text-headline">プロフィール</router-link>
     </li>
-    <li class="pure-menu-item">
-        <router-link to="/login" class="pure-menu-link text-headline">ログイン</router-link>
-    </li>
   </div>
   </div>
   <div class="bg-secondary"> 

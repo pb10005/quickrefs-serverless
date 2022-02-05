@@ -1,9 +1,9 @@
 <script setup>
 </script>
 <template>
-    <div class="card">
+    <div class="card bg-tertiary">
       <p>まだログインしていません</p>
-      <router-link class="pure-button bg-main text-white" to="/login">ログイン</router-link>
+      <router-link class="pure-button" to="/login">ログイン</router-link>
     </div>
 </template>
 <style scoped>
