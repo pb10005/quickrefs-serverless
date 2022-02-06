@@ -34,6 +34,11 @@ const onTagSelected = (tagId) => {
     });
 };
 
+const clearSelection = () => {
+  state.selectedTag = null;
+  state.knowledges = [];
+};
+
 onMounted(() => {
   state.isLoggedIn = localStorage.getItem("sessionId") ? true : false;
   fetchTags();
@@ -47,9 +52,17 @@ onMounted(() => {
     <div class="pure-u-1">
       <h3 class="text-headline">ナレッジをタグで検索する</h3>
       <p class="text-paragraph">タグをクリックしてナレッジを探しましょう</p>
-      <p v-if="state.selectedTag">state.selectedTag.name</p>
-      <tag-list :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
+      <p v-if="state.selectedTag">
+        <span class="text-paragraph">選択中のタグ: {{ state.selectedTag.name }}</span>
+        <button class="button-small pure-button clear-button" @click="clearSelection">選択をクリア</button>
+      </p>
+      <tag-list v-if="!state.selectedTag" :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
       <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
     </div>
   </div>
 </template>
+<style scoped>
+.clear-button {
+  margin-left: 5px;
+}
+</style>
