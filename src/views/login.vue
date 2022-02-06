@@ -44,6 +44,7 @@ const login = () => {
         </div>
       </fieldset>
     </form>
+    <p>新規登録は<router-link to="/signup">こちら</router-link></p>
     </div>
   </div>
 </template>

@@ -1,6 +1,15 @@
 FROM node:buster-slim
 
-RUN yarn global add vite
+WORKDIR /app
 EXPOSE 3000
 
-CMD [ "/bin/bash" ]
+RUN yarn global add vite
+
+COPY ./package.json ./
+COPY ./yarn.lock ./
+
+RUN yarn
+
+COPY . .
+
+CMD [ "yarn", "dev" ]
