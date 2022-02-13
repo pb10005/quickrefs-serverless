@@ -43,7 +43,7 @@ const onSubmit = () => {
             <small v-if="item.description">{{item.description}}</small>
           </div>
           <div class="panel-footer">
-            <a v-if="item.url" class="button-small pure-button bg-main text-white" target="_blank" :href="item.url">表示</a>
+            <a v-if="item.url" class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" target="_blank" :href="item.url">表示</a>
             <button v-if="isOwner" @click="editItem(item)" class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2">編集</button>
             <button v-if="isOwner" @click="deleteItem(item)" class="bg-base rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2">削除</button>
           </div>

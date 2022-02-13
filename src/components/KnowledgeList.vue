@@ -13,7 +13,7 @@ defineProps({
 <template>
   <div class="grid grid-cols-6">
     <div class="col-span-6 sm:col-span-3 md:col-span-2" v-for="item in knowledgeList" :key="item">
-      <div class="bg-secondary mx-1 p-2">
+      <div class="bg-secondary m-1 p-2">
         <div class="text-card-heading">
           <strong>{{item.name}}</strong>
         </div>
