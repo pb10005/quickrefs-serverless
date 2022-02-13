@@ -38,7 +38,7 @@ const login = () => {
         <input id="password" type="password" placeholder="Password" class="title w-full h-12 px-4 outline-none mb-2" v-model="state.password">
       </div>
       <div class="mb-3">
-        <input type="submit" class="bg-accent px-3 py-2 rounded-lg" value="ログイン">
+        <input type="submit" class="bg-accent px-3 py-2 rounded-lg cursor-pointer" value="ログイン">
       </div>
       <p>新規登録は<router-link to="/signup">こちら</router-link></p>
     </div>
