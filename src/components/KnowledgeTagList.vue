@@ -14,7 +14,7 @@ const emit = defineEmits(['onTagDeleteButtonPressed']);
 </script>
 <template>
   <div>
-    <span class="inline-flex bg-tertiary mr-2 rounded-lg px-3 py-2" v-for="tag in props.tags" :key="tag"> 
+    <span class="inline-flex bg-tertiary mr-2 mb-1 rounded-lg px-3 py-2" v-for="tag in props.tags" :key="tag"> 
       <div class="mr-1">
         {{tag.name}}
       </div>
