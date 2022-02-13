@@ -40,26 +40,23 @@ onMounted(() => {
 
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
-    <fieldset>
-    <legend>ナレッジを編集</legend>
-    <div class="pure-control-group">
-      <label for="name">表示名</label>
-      <input id="name" type="text" v-model="state.name" required>
+  <form @submit.prevent="sendData" class="bg-tertiary mt-2 px-2 py-3">
+    <h2 class="text-headline text-center font-bold mb-3 text-lg">ナレッジを編集</h2>
+    <div class="mb-2">
+      <p>表示名</p>
+      <input id="name" type="text" placeholder="表示名" class="w-full h-10 px-4 outline-none" v-model="state.name" required>
     </div>
-    <div class="pure-control-group">
-      <label for="description">説明</label>
-      <textarea id="description" type="text" v-model="state.description"></textarea>
+    <div class="mb-2">
+      <p>説明</p>
+      <textarea id="description" placeholder="説明" class="w-full h-60 px-4 outline-none" type="text" v-model="state.description"></textarea>
     </div>
-    <div class="pure-control-group">
-      <label for="description">非公開にする</label>
-      <input id="description" type="checkbox" v-model="state.isPrivate">
-    </div>
+    <label class="inline-flex items-center mt-3 mb-3">
+        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" v-model="state.isPrivate"><span class="ml-2 text-gray-700">非公開にする</span>
+    </label>
     <div class="pure-controls">
-      <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-      <button class="pure-button bg-main text-white">確定</button>
+      <button @click.prevent="cancel" class="bg-base text-sm rounded-lg px-3 py-2 cursor-pointer mr-2">キャンセル</button>
+      <button class="bg-accent text-sm rounded-lg px-3 py-2 cursor-pointer">確定</button>
     </div>
-    </fieldset>
   </form>
 </template>
 

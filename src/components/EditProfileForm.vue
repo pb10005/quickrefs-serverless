@@ -41,16 +41,16 @@ const cancel = () => {
 
 <template>
   <div>
-    <form @submit.prevent="signup" class="pure-form pure-form-aligned">
+    <form @submit.prevent="signup" class="bg-tertiary">
       <fieldset>
-        <legend>プロフィールを編集する</legend>
+        <p class="text-lg font-bold">プロフィールを編集する</p>
         <div class="pure-control-group">
           <label for="screen-name">表示名</label>
-          <input id="screen-name" type="text" placeholder="Screen Name" v-model="state.profile.screenName" required><br>
+          <input id="screen-name" type="text" class="w-full h-10 px-4 outline-none"  placeholder="表示名" v-model="state.profile.screenName" required><br>
         </div>
-        <div class="pure-controls">
-          <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-          <button @click.prevent="submit" class="pure-button bg-main text-white">登録</button>
+        <div class="mt-2">
+          <button @click.prevent="cancel" class="bg-base rounded-md text-sm px-3 py-2 mr-2 cursor-pointer">キャンセル</button>
+          <button @click.prevent="submit" class="bg-accent rounded-md text-sm px-3 py-2 cursor-pointer">登録</button>
         </div>
       </fieldset>
     </form>

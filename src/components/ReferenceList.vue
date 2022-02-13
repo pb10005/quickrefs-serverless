@@ -32,11 +32,10 @@ const onSubmit = () => {
 
 </script>
 <template>
-  <div class="">
-    <div class="">
-      <edit-reference-form :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
-      <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in referenceList" :key="item">
-        <div v-show="!state.isEditMode" class="panel bg-card">
+  <div class="grid grid-cols-6">
+      <edit-reference-form class="col-span-6" :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
+      <div class="col-span-6 sm:col-span-3 md:col-span-2" v-for="item in referenceList" :key="item">
+        <div v-show="!state.isEditMode" class="panel bg-secondary">
           <div class="panel-header text-card-headline">
             <strong>{{item.name}}</strong>
           </div>
@@ -45,11 +44,10 @@ const onSubmit = () => {
           </div>
           <div class="panel-footer">
             <a v-if="item.url" class="button-small pure-button bg-main text-white" target="_blank" :href="item.url">表示</a>
-            <button v-if="isOwner" @click="editItem(item)" class="button-small pure-button bg-main text-white">編集</button>
-            <button v-if="isOwner" @click="deleteItem(item)" class="button-small pure-button bg-accent text-white">削除</button>
+            <button v-if="isOwner" @click="editItem(item)" class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2">編集</button>
+            <button v-if="isOwner" @click="deleteItem(item)" class="bg-base rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2">削除</button>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>

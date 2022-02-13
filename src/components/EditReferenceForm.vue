@@ -47,26 +47,28 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form class="pure-form pure-form-aligned">
+  <div class="">
+  <form class="bg-tertiary py-3 px-2">
     <fieldset>
-      <legend>リファレンスを編集</legend>
+      <p class="font-bold">リファレンスを編集</p>
       <div class="pure-control-group">
         <label for="name">表示名</label>
-        <input id="name" type="text" v-model="state.name" required>
+        <input id="name" type="text" v-model="state.name" placeholder="表示名" class="w-full h-10 px-4 outline-none" required>
       </div>
       <div class="pure-control-group">
         <label for="description">説明</label>
-        <textarea type="text" v-model="state.description"></textarea>
+        <textarea type="text" class="w-full h-40 px-4 outline-none" placeholder="説明" v-model="state.description"></textarea>
       </div>
       <div class="pure-control-group">
         <label for="url">URL</label>
-        <input id="url" type="text" v-model="state.url">
+        <input id="url" type="text" class="w-full h-10 px-4 outline-none" placeholder="URL" v-model="state.url">
       </div>
-      <div class="pure-controls">
-        <button @click.prevent="cancel" class="pure-button">キャンセル</button>
-        <button @click.prevent="sendData" class="pure-button bg-main text-white">編集</button>
+      <div class="mt-2">
+        <button @click.prevent="cancel" class="bg-base rounded-md text-sm px-3 py-2 cursor-pointer mr-2">キャンセル</button>
+        <button @click.prevent="sendData" class="bg-accent rounded-md text-sm px-3 py-2 cursor-pointer">編集</button>
       </div>
     </fieldset>
   </form>
+  </div>
 </template>
 

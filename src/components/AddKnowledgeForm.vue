@@ -22,26 +22,24 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
-    <fieldset>
-    <legend>ナレッジを新規作成</legend>
-    <div class="pure-control-group">
-      <label for="name">表示名</label>
-      <input id="name" type="text" v-model="state.name" required>
-    </div>
-    <div class="pure-control-group">
-      <label for="description">説明</label>
-      <textarea id="description" type="text" v-model="state.description"></textarea>
-    </div>
-    <div class="pure-control-group">
-      <label for="description">非公開にする</label>
-      <input id="description" type="checkbox" v-model="state.isPrivate">
-    </div>
-    <div class="pure-controls">
-      <button class="pure-button bg-main text-white">作成</button>
-    </div>
-    </fieldset>
-  </form>
+  <div class="bg-tertiary py-3 px-2 h-px">
+    <form @submit.prevent="sendData" class="">
+      <h2 class="text-headline text-center font-bold text-2xl mb-3">ナレッジを新規作成</h2>
+      <div class="mb-2">
+        <input id="name" type="text" placeholder="表示名" class="w-full h-10 px-4 outline-none" v-model="state.name" required>
+      </div>
+      <div>
+        <textarea id="description" placeholder="説明" class="w-full h-60 px-4 outline-none" type="text" v-model="state.description"></textarea>
+      </div>
+      
+      <label class="inline-flex items-center mt-3 mb-3">
+          <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" v-model="state.isPrivate"><span class="ml-2 text-gray-700">非公開にする</span>
+      </label>
+      <div class="pure-controls">
+        <button class="bg-accent rounded-md font-semibold py-2 w-full">作成</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 

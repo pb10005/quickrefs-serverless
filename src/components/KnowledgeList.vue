@@ -11,22 +11,24 @@ defineProps({
 
 </script>
 <template>
-    <div class="pure-u-sm-1-2 pure-u-lg-1-3" v-for="item in knowledgeList" :key="item">
-      <div class="panel bg-card">
-        <div class="panel-header text-card-heading">
+  <div class="grid grid-cols-6">
+    <div class="col-span-6 sm:col-span-3 md:col-span-2" v-for="item in knowledgeList" :key="item">
+      <div class="bg-secondary mx-1 p-2">
+        <div class="text-card-heading">
           <strong>{{item.name}}</strong>
         </div>
-        <div class="text-card-paragraph">
+        <div class="text-paragraph text-sm">
           <small>最終更新日: {{displayDateTime(item.updatedAt)}}</small>
         </div>
-        <div class="panel-body text-card-paragraph">
+        <div class="panel-body text-paragraph">
           <small>{{item.description}}</small>
         </div>
-        <div class="panel-footer">
-          <router-link class="button-small pure-button" :to="`/knowledge/view/${item.id}`">詳細</router-link>
+        <div class="">
+          <router-link class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" :to="`/knowledge/view/${item.id}`">詳細</router-link>
         </div>
       </div>
-    </div>
+      </div>
+  </div>
 </template>
 <style scoped>
 .panel {

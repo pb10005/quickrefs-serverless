@@ -29,23 +29,23 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
+  <form @submit.prevent="sendData" class="bg-tertiary py-3 px-2">
     <fieldset>
-      <legend>リファレンスを新規作成</legend>
+      <p class="font-bold">リファレンスを新規作成</p>
       <div class="pure-control-group">
-        <label for="name">表示名</label>
-        <input id="name" type="text" v-model="state.name" required>
+        <p>表示名</p>
+        <input id="name" type="text" v-model="state.name" placeholder="表示名" class="w-full h-10 px-4 outline-none" required>
       </div>
       <div class="pure-control-group">
         <label for="description">説明</label>
-        <textarea type="text" v-model="state.description"></textarea>
+        <textarea type="text" class="w-full h-40 px-4 outline-none" placeholder="説明" v-model="state.description"></textarea>
       </div>
       <div class="pure-control-group">
         <label for="url">URL</label>
-        <input id="url" type="text" v-model="state.url">
+        <input id="url" type="text" class="w-full h-10 px-4 outline-none" placeholder="URL" v-model="state.url">
       </div>
-      <div class="pure-controls">
-        <button class="pure-button bg-main text-white">作成</button>
+      <div class="mt-2">
+        <button class="bg-accent rounded-md text-sm px-3 py-2 cursor-pointer">追加</button>
       </div>
     </fieldset>
   </form>

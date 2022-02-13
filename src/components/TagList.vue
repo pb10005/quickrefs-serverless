@@ -11,22 +11,11 @@ const emit = defineEmits(['onTagSelected']);
 </script>
 <template>
   <div>
-    <div class="tag" v-for="tag in props.tags" :key="tag"> 
-      <div class="tag-box bg-tertiary" @click="emit('onTagSelected', tag.id)">{{tag.name}}</div>
+    <div class="inline-flex" v-for="tag in props.tags" :key="tag"> 
+      <div class="mx-1 px-3 py-2 rounded-lg cursor-pointer bg-tertiary" @click="emit('onTagSelected', tag.id)">{{tag.name}}</div>
     </div>
   </div>
 </template>
 <style scoped>
-.tag {
-  margin: 10px 5px;
-  display: inline-block;
-  height: fit-content;
-}
-.tag-box {
-  display: inline-block;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-}
 </style>
 

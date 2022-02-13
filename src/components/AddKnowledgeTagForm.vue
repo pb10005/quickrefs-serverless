@@ -35,15 +35,15 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
+  <form @submit.prevent="sendData" class="bg-tertiary py-3 px-2">
     <fieldset>
-      <legend>タグを追加</legend>
-      <div class="pure-control-group">
-        <label for="name">タグ名</label>
-        <input id="name" type="text" v-model="state.name" required>
+      <p class="font-bold">タグを追加</p>
+      <div class="mb-2">
+        <p>タグ名</p>
+        <input id="name" type="text" class="w-full h-10 px-4 outline-none" placeholder="タグ名" v-model="state.name" required>
       </div>
-      <div class="pure-controls">
-        <button class="pure-button bg-main text-white">追加</button>
+      <div class="">
+        <button class="bg-accent rounded-md text-sm px-3 py-2 cursor-pointer">追加</button>
       </div>
     </fieldset>
   </form>

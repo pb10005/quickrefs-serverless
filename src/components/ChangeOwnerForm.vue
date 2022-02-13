@@ -23,15 +23,15 @@ const sendData = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="sendData" class="pure-form pure-form-aligned">
+  <form @submit.prevent="sendData" class="bg-tertiary py-3 px-2">
     <fieldset>
-      <legend>所有者を移転</legend>
+      <p class="font-bold">所有者を移転</p>
       <div class="pure-control-group">
-        <label for="name">移転先のユーザID</label>
-        <input id="name" type="text" v-model="state.userId" required>
+        <p>移転先のユーザID</p>
+        <input id="name" type="text" v-model="state.userId" class="w-full h-10 px-4 outline-none" placeholder="説明" required>
       </div>
-      <div class="pure-controls">
-        <button class="pure-button bg-main text-white">移転</button>
+      <div class="mt-2">
+        <button class="bg-accent rounded-md text-sm px-3 py-2 cursor-pointer">移転</button>
       </div>
     </fieldset>
   </form>

@@ -45,20 +45,22 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="pure-g">
-    <div class="pure-u-1">
+  <div>
+  <div class="bg-base rounded-lg mt-2 p-2">
+    <div class="mt-2">
       <not-logged-in-card v-if="!state.isLoggedIn"/>
     </div>
-    <div class="pure-u-1">
-      <h3 class="text-headline">ナレッジをタグで検索する</h3>
+    <div class="">
+      <h3 class="font-bold text-headline">ナレッジをタグで検索する</h3>
       <p class="text-paragraph">タグをクリックしてナレッジを探しましょう</p>
-      <p v-if="state.selectedTag">
-        <span class="text-paragraph">選択中のタグ: {{ state.selectedTag.name }}</span>
-        <button class="button-small pure-button clear-button" @click="clearSelection">選択をクリア</button>
+      <p v-if="state.selectedTag"  class="mb-2">
+        <span class="text-paragraph text-sm">選択中のタグ: {{ state.selectedTag.name }}</span>
+        <button class="bg-accent rounded-lg text-sm cursor-pointer px-3 py-2 ml-2" @click="clearSelection">選択をクリア</button>
       </p>
       <tag-list v-if="!state.selectedTag" :tags="state.tags" @onTagSelected="onTagSelected"></tag-list>
       <knowledge-list :knowledgeList="state.knowledges"></knowledge-list>
     </div>
+  </div>
   </div>
 </template>
 <style scoped>

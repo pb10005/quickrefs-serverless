@@ -25,28 +25,26 @@ const login = () => {
 </script>
 
 <template>
-  <div class="px">
-    <div class="">
-    <error-card v-if="errMsg" :message="errMsg" />
-    <form @submit.prevent="login" class="pure-form pure-form-aligned">
-      <fieldset>
-        <legend class="text-headline">ログイン</legend>
-        <div class="pure-control-group">
-          <label for="id">ID</label>
-          <input id="id" type="text" placeholder="Id" v-model="state.id">
-        </div>
-        <div class="pure-control-group">
-          <label for="password">パスワード</label>
-          <input id="password" type="password" placeholder="password" v-model="state.password">
-        </div>
-        <div class="pure-controls">
-          <input type="submit" class="pure-button bg-main text-white" value="ログイン">
-        </div>
-      </fieldset>
-    </form>
-    <p>新規登録は<router-link to="/signup">こちら</router-link></p>
+<div class="min-h-screen">
+  <error-card v-if="errMsg" :message="errMsg" />
+  <div class="flex justify-center items-center">
+  <form @submit.prevent="login" class="mt-6">
+    <div class="bg-tertiary px-6 py-10 shadow-lg">
+      <legend class="text-headline heading text-center font-bold text-2xl mb-3">ログイン</legend>
+      <div class="">
+        <input id="id" type="text" placeholder="Username" class="title w-full h-12 px-4 outline-none mb-2" v-model="state.id">
+      </div>
+      <div class="">
+        <input id="password" type="password" placeholder="Password" class="title w-full h-12 px-4 outline-none mb-2" v-model="state.password">
+      </div>
+      <div class="mb-3">
+        <input type="submit" class="bg-accent px-3 py-2 rounded-lg" value="ログイン">
+      </div>
+      <p>新規登録は<router-link to="/signup">こちら</router-link></p>
     </div>
+  </form>
   </div>
+</div>
 </template>
 
 <style scoped>
