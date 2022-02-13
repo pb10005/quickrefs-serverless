@@ -24,6 +24,7 @@ const state = reactive({
   isEditMode: false,
   description: "",
   createdAt: null,
+  updatedAt: null,
   list: [],
   tags: [],
   owners: [],
@@ -51,6 +52,7 @@ const fetchKnowledges = () => {
             state.name = doc.data.name;
             state.description = doc.data.description;
             state.createdAt = doc.data.createdAt;
+            state.updatedAt = doc.data.updatedAt;
             return axios.get(`/userknowledges/findbyknowledge/${route.params.id}`)
           })
           .then(doc => {
@@ -105,7 +107,7 @@ onMounted(() => {
             <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
               <div class="mt-2 flex items-center text-sm text-gray-500">
                 <CalendarIcon class="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                作成日 {{new Date(state.createdAt).toLocaleString()}}
+                最終更新日 {{new Date(state.updatedAt).toLocaleString()}}
               </div>
             </div>
             <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
