@@ -34,13 +34,14 @@ const onSubmit = () => {
 <template>
   <div class="grid grid-cols-6">
       <edit-reference-form class="col-span-6" :reference="state.reference" @submit="onSubmit" @cancel="state.isEditMode = false" v-show="state.isEditMode"/>
-      <div class="col-span-6 sm:col-span-3 md:col-span-2" v-for="item in referenceList" :key="item">
-        <div v-show="!state.isEditMode" class="panel bg-secondary">
-          <div class="panel-header text-card-headline">
-            <strong>{{item.name}}</strong>
+      <div class="col-span-6 sm:col-span-3 md:col-span-2 m-1" v-for="item in referenceList" :key="item">
+        <div v-show="!state.isEditMode" class="bg-secondary w-full h-full p-2">
+          <div class="text-headline font-bold">
+            {{item.name}}
           </div>
-          <div class="panel-body text-card-paragraph">
-            <small v-if="item.description">{{item.description}}</small>
+          <div class="panel-body text-paragraph mb-1">
+            <p class="text-sm">最終更新日 {{ new Date(item.updatedAt).toLocaleString() }}</p>
+            <p v-if="item.description">{{item.description}}</p>
           </div>
           <div class="panel-footer">
             <a v-if="item.url" class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" target="_blank" :href="item.url">表示</a>
@@ -52,17 +53,7 @@ const onSubmit = () => {
   </div>
 </template>
 <style scoped>
-.panel {
-  margin: 5px 5px 0 5px;
-  padding: 5px;
-  border-radius: 3px;
-}
-.panel-header {
-  padding: 5px 0;
-}
 .panel-body {
-  padding: 10px 5px;
   white-space: pre-wrap;
-  min-height: 30px;
 }
 </style>
