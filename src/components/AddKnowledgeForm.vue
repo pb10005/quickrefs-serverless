@@ -25,7 +25,7 @@ const sendData = () => {
   <div>
     <div class="bg-tertiary py-3 px-2 mt-2 rounded-lg">
       <form @submit.prevent="sendData" class="">
-        <h2 class="text-headline text-center font-bold text-2xl mb-3">ナレッジを新規作成</h2>
+        <h2 class="text-headline font-bold text-xl mb-3">ナレッジを新規作成</h2>
         <div class="mb-2">
           <p>表示名</p>
           <input id="name" type="text" placeholder="表示名" class="w-full h-10 px-4 outline-none" v-model="state.name" required>

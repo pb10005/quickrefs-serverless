@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 <template>
   <form @submit.prevent="sendData" class="bg-tertiary mt-2 px-2 py-3">
-    <h2 class="text-headline text-center font-bold mb-3 text-lg">ナレッジを編集</h2>
+    <h2 class="text-headline font-bold mb-3 text-lg">ナレッジを編集</h2>
     <div class="mb-2">
       <p>表示名</p>
       <input id="name" type="text" placeholder="表示名" class="w-full h-10 px-4 outline-none" v-model="state.name" required>
