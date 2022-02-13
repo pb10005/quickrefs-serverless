@@ -41,7 +41,7 @@ const onSubmit = () => {
           </div>
           <div class="panel-body text-paragraph mb-1">
             <p class="text-sm">最終更新日 {{ new Date(item.updatedAt).toLocaleString() }}</p>
-            <p v-if="item.description">{{item.description}}</p>
+            <p class="text-sm" v-if="item.description">{{item.description}}</p>
           </div>
           <div class="panel-footer">
             <a v-if="item.url" class="bg-accent rounded-md text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" target="_blank" :href="item.url">表示</a>
