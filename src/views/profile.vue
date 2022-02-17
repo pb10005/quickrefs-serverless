@@ -53,7 +53,7 @@ const editProfile = (profile) => {
     <div class="mt-2" v-if="!state.isLoggedIn">
       <not-logged-in-card></not-logged-in-card>
     </div>
-    <div v-else class="mt-2">
+    <div v-else class="my-2">
         <div class="bg-tertiary px-3 py-4 rounded-lg lg:flex lg:items-center lg:justify-between">
           <div class="flex-1 min-w-0">
             <div v-show="state.isEditProfileMode">
