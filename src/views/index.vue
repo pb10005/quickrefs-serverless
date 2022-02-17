@@ -46,7 +46,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
-  <div class="bg-base rounded-lg mt-2 p-2">
+  <div class="bg-base rounded-lg my-2 p-2">
     <div class="mt-2">
       <not-logged-in-card v-if="!state.isLoggedIn"/>
     </div>
