@@ -127,7 +127,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="bg-base px-2 py-4 rounded-lg mt-2">
+      <div class="bg-base px-2 py-4 rounded-lg my-2">
       <p class="font-bold text-lg mb-2">リファレンス</p>
       <div class="mb-2">
         <a v-if="state.isOwner" class="bg-accent rounded-lg text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" @click="state.isAddTagFormVisible ^= true">タグを追加</a>
