@@ -10,6 +10,7 @@ export const getKnowledges = async () => {
             return {
                 id: x.id,
                 name: x.name,
+                description: x.description,
                 isPrivate: x.is_private,
                 createdAt: x.created_at,
                 updatedAt: x.updated_at
@@ -29,6 +30,7 @@ export const getKnowledgesByUserId = async (id) => {
             return {
                 id: x.id,
                 name: x.name,
+                description: x.description,
                 isPrivate: x.is_private,
                 createdAt: x.created_at,
                 updatedAt: x.updated_at
@@ -48,6 +50,7 @@ export const getKnowledgesByTag = async (tagId) => {
             return {
                 id: x.knowledges.id,
                 name: x.knowledges.name,
+                description: x.description,
                 isPrivate: x.knowledges.is_private,
                 createdAt: x.knowledges.created_at,
                 updatedAt: x.knowledges.updated_at
