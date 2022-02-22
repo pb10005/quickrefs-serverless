@@ -1,16 +1,19 @@
 <script setup>
 import { ref } from "vue"
+import { useRouter } from "vue-router"
 import { supabase } from "../supabase"
 
 const loading = ref(false)
 const email = ref("")
+const password = ref("")
+const router = useRouter()
 
 const handleLogin = async () => {
     try {
       loading.value = true
-      const { error } = await supabase.auth.signIn({ email: email.value })
+      const { error } = await supabase.auth.signIn({ email: email.value, password: password.value })
       if (error) throw error
-      alert("Magic Linkを記載したメールを送信しました。メールボックスを確認してください。")
+      router.push("/profile")
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {
@@ -24,7 +27,7 @@ const handleLogin = async () => {
     <form @submit.prevent="handleLogin">
       <div class="">
         <h1 class="text-headline font-bold text-lg">ログイン</h1>
-        <p class="text-paragraph">Magic Linkを使ってログインしましょう</p>
+        <p class="text-paragraph">メールアドレスとパスワードを入力してログインしましょう</p>
         <div class="my-2">
           <input
             class="w-full h-10 px-4 outline-none"
@@ -33,11 +36,19 @@ const handleLogin = async () => {
             v-model="email"
           />
         </div>
+        <div class="my-2">
+          <input
+            class="w-full h-10 px-4 outline-none"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+          />
+        </div>
         <div>
           <input
             type="submit"
             class="bg-accent rounded-md px-4 py-2"
-            :value="loading ? '読み込み中' : 'Magic Linkを送信する'"
+            :value="loading ? '読み込み中' : 'ログイン'"
             :disabled="loading"
           />
         </div>

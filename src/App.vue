@@ -13,6 +13,10 @@ const navigation = [
 
 store.user = supabase.auth.user()
 supabase.auth.onAuthStateChange((_, session) => {
+  if(!session) {
+    store.user = {}
+    return
+  }
   store.user = session.user
 })
 </script>

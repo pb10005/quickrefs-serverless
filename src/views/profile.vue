@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
 import NotLoggedInCard from "../components/NotLoggedInCard.vue";
 import KnowledgeList from "../components/KnowledgeList.vue";
 import EditProfileForm from "../components/EditProfileForm.vue";
@@ -9,7 +10,9 @@ import {
 } from '@heroicons/vue/solid'
 import { store } from '../store';
 import { getProfileById, upsertProfile, getKnowledgesByUserId } from '../supabase-client';
+import { supabase } from "../supabase";
 
+const router = useRouter()
 const state = reactive({
   isEditProfileMode: false,
   profile: {
@@ -21,6 +24,7 @@ const state = reactive({
 });
 
 const fetchData = async () => {
+  if(!store.user) return
   const { data } = await getProfileById(store.user.id);
   if(data)
     state.profile = data
@@ -36,7 +40,12 @@ const editProfile = (profile) => {
   upsertProfile(store.user.id, profile)
     .then(fetchData)
     .then(() => state.isEditProfileMode = false)
-};
+}
+
+const logout = async () => {
+  await supabase.auth.signOut()
+  router.push("/login")
+}
 </script>
 <template>
   <div>
@@ -58,10 +67,15 @@ const editProfile = (profile) => {
                 </div>
               </div>
               <div class="mt-5 flex">
-                <span class="block">
+                <span class="block mr-2">
                   <button type="button" @click="state.isEditProfileMode = true" class="inline-flex items-center bg-accent px-4 py-2 rounded-lg text-sm hover:bg-gray-50 focus:outline-none">
                     <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                     編集
+                  </button>
+                </span>
+                <span class="block">
+                  <button type="button" @click="logout" class="inline-flex items-center bg-base px-4 py-2 rounded-lg text-sm hover:bg-gray-50 focus:outline-none">
+                    ログアウト
                   </button>
                 </span>
               </div>
