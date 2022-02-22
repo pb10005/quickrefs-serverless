@@ -221,7 +221,7 @@ export const getTagByName = async (name) => {
 }
 
 export const getTags = async () => {
-    const { data, error } = await supabase.from('tags')
+    const { data, error } = await supabase.rpc('visible_tags')
         .select()
     return {
         data,
