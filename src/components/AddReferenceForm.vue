@@ -18,7 +18,7 @@ const sendData = async () => {
     knowledgeId: route.params.id,
     name: state.name,
     description: state.description,
-    url: url
+    url: state.url
   })
   state.name = "";
   state.description = "";

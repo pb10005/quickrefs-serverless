@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from "vue";
+import EditReferenceForm from "./EditReferenceForm.vue";
 import { deleteRef } from '../supabase-client';
 
 const state = reactive({
