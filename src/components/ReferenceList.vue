@@ -1,7 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import axios from "../http_client.js";
-import EditReferenceForm from "./EditReferenceForm.vue";
+import { deleteRef } from '../supabase-client';
 
 const state = reactive({
   selectedReference: null,
@@ -20,8 +19,7 @@ const editItem = (reference) => {
 };
 
 const deleteItem = ({ id }) => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.delete(`/references/${id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
+    deleteRef(id)
     .then(emit("submit"));
 };
 

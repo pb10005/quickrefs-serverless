@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
+import { supabase } from './supabase';
+import { store } from './store';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -9,6 +11,10 @@ const navigation = [
   { name: 'Profile', href: '/profile', current: false },
 ]
 
+store.user = supabase.auth.user()
+supabase.auth.onAuthStateChange((_, session) => {
+  store.user = session.user
+})
 </script>
 
 <template>

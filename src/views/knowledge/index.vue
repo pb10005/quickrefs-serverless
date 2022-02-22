@@ -1,14 +1,12 @@
 <script setup>
 import { onMounted, ref, reactive } from "vue";
 import { useRoute } from 'vue-router'
-import axios from "../../http_client.js";
 import ReferenceList from "../../components/ReferenceList.vue";
 import AddReferenceForm from "../../components/AddReferenceForm.vue";
 import AddKnowledgeTagForm from "../../components/AddKnowledgeTagForm.vue";
 import KnowledgeTagList from "../../components/KnowledgeTagList.vue";
 import EditKnowledgeForm from "../../components/EditKnowledgeForm.vue";
 import ErrorCard from "../../components/ErrorCard.vue";
-import ChangeOwnerForm from "../../components/ChangeOwnerForm.vue";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -18,74 +16,60 @@ import {
   PencilIcon,
 } from '@heroicons/vue/solid'
 
+import { getProfileById, getKnowledgeById, getKnowledgeTags, getRefsByKnowledgeId, deleteKnowledgeTag } from '../../supabase-client';
+import { store } from "../../store";
+
 const route = useRoute();
 const state = reactive({
   name: "",
   isEditMode: false,
   description: "",
+  isPrivate: false,
   createdAt: null,
   updatedAt: null,
   list: [],
   tags: [],
-  owners: [],
+  owner: "",
   isAddTagFormVisible: false,
   isAddReferenceFormVisible: false,
-  isChangeOwnerFormVisible: false,
   isOwner: false
 });
 
 const errMsg = ref("");
 
-const fetchKnowledges = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.get(`/knowledges/check/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-    .then(doc => {
-      if(doc.data === 2)
-      {
-        state.isOwner = true;
-      } else {
-        state.isOwner = false;
-      }
-    });
-  axios.get(`/knowledges/${route.params.id}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-          .then(doc => {
-            state.name = doc.data.name;
-            state.description = doc.data.description;
-            state.createdAt = doc.data.createdAt;
-            state.updatedAt = doc.data.updatedAt;
-            return axios.get(`/userknowledges/findbyknowledge/${route.params.id}`)
-          })
-          .then(doc => {
-            state.owners = doc.data;
-            return axios.get(`/references/findbyknowledge/${route.params.id}`);
-          })
-          .then(doc => {
-            state.list = doc.data;
-            return axios.get(`/knowledgeTags/findbyknowledge/${route.params.id}`)
-          })
-          .then(doc => {
-            state.tags = doc.data;
-          })
-          .catch(err => {
-            errMsg.value = err.message;
-          });
+const fetchKnowledges = async () => {
+  const knowledge = await getKnowledgeById(route.params.id)
+  state.name = knowledge.data.name
+  state.description = knowledge.data.description
+  state.isPrivate = knowledge.data.isPrivate
+  state.createdAt = knowledge.data.createdAt
+  state.updatedAt = knowledge.data.updatedAt
+
+  const profile = await getProfileById(knowledge.data.owner);
+  state.ownerId = profile.data.id
+  state.owner = profile.data.screenName
+  state.isOwner = state.ownerId === store.user.id
+
+  const tags = await getKnowledgeTags(route.params.id)
+  state.tags = tags.data
+
+  const refs = await getRefsByKnowledgeId(route.params.id)
+  state.list = refs.data
 };
 
 const onSubmit = () => {
   fetchKnowledges();
   state.isAddReferenceFormVisible = false;
   state.isAddTagFormVisible = false;
-  state.isChangeOwnerFormVisible = false;
 };
 
-const deleteTag = (tagId) => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.delete(`/knowledgeTags/${route.params.id}/${tagId}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-    .then(onSubmit);
+const deleteTag = async (tagId) => {
+  await deleteKnowledgeTag(route.params.id, tagId)
+  await onSubmit()
 };
 
-onMounted(() => {
-  fetchKnowledges();
+onMounted(async () => {
+  await fetchKnowledges();
 });
 </script>
 
@@ -93,7 +77,7 @@ onMounted(() => {
   <div>
     <error-card v-if="errMsg" :message="errMsg"/>
     <div v-else>
-      <edit-knowledge-form :id="route.params.id" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
+      <edit-knowledge-form :id="route.params.id" :knowledge="{name:state.name,description:state.description,isPrivate:state.isPrivate}" v-show="state.isEditMode" @cancel="state.isEditMode = false" @submit="() => {fetchKnowledges(); state.isEditMode=false;}"></edit-knowledge-form>
       <div v-show="!state.isEditMode">
         <div class="bg-secondary mt-2 px-3 py-4 rounded-lg lg:flex lg:items-center lg:justify-between">
           <div class="flex-1 min-w-0">
@@ -113,7 +97,7 @@ onMounted(() => {
             <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
               <div class="mt-2 flex items-center text-sm text-gray-500">
                 <UserIcon class="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                所有者:<span v-for="user in state.owners" :key="user.id">{{user.screenName}}</span>
+                所有者:<span>{{state.owner}}</span>
               </div>
             </div>
             <div class="mt-5 flex">
@@ -132,11 +116,9 @@ onMounted(() => {
       <div class="mb-2">
         <a v-if="state.isOwner" class="bg-accent rounded-lg text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" @click="state.isAddTagFormVisible ^= true">タグを追加</a>
         <a v-if="state.isOwner" class="bg-accent rounded-lg text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" @click="state.isAddReferenceFormVisible ^= true">リファレンスを追加</a>
-        <a v-if="state.isOwner" class="bg-accent rounded-lg text-sm text-center px-3 py-2 cursor-pointer transition duration-300 ease-in-out hover:bg-blue-600 mr-2" @click="state.isChangeOwnerFormVisible ^= true">所有者を移転</a>
       </div>
       <add-knowledge-tag-form v-show="state.isAddTagFormVisible"  @submit="onSubmit"></add-knowledge-tag-form>
       <add-reference-form @submit="onSubmit" v-show="state.isAddReferenceFormVisible"></add-reference-form>
-      <change-owner-form @submit="onSubmit" v-show="state.isChangeOwnerFormVisible"></change-owner-form>
       
         <reference-list :isOwner="state.isOwner" :referenceList="state.list" @submit="onSubmit"></reference-list>
       </div>

@@ -4,8 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import index from './views/index.vue';
 import login from './views/login.vue';
-import signup from './views/signup/index.vue';
-import signup_complete from './views/signup/complete.vue';
 import knowledge_list from './views/knowledge/list.vue';
 import knowledge from './views/knowledge/index.vue';
 import knowledge_add from './views/knowledge/add.vue';
@@ -19,14 +17,6 @@ const routes = [
   {
     path: '/login',
     component: login
-  },
-  {
-    path: '/signup',
-    component: signup
-  },
-  {
-    path: '/signup/complete',
-    component: signup_complete
   },
   {
      path: '/knowledge/list',

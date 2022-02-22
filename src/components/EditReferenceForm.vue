@@ -1,27 +1,29 @@
 <script setup>
 import { reactive, watch } from "vue";
 import { useRoute } from "vue-router";
-import axios from "../http_client.js";
+import { updateRef } from '../supabase-client';
 
 const route = useRoute();
 
 const emit = defineEmits();
 const props = defineProps({
-    reference: {
-        id: "",
-        name: "",
-        description: "",
-        url: ""
-    }
+  reference: {
+      id: "",
+      name: "",
+      description: "",
+      url: ""
+  }
 });
 
 const state = reactive({
+ id: "",
  name: "",
  description: "",
  url: ""
 });
 
-watch(() => props.reference, (to, from) => {
+watch(() => props.reference, (to,_) => {
+    state.id = to.id;
     state.name = to.name;
     state.description = to.description;
     state.url = to.url;
@@ -31,19 +33,16 @@ const cancel = () => {
     emit("cancel");
 };
 
-const sendData = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.put(`/References/${props.reference.id}`, {
+const sendData = async () => {
+  await updateRef(state.id, {
     name: state.name,
     description: state.description,
     url: state.url
-  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-  .then(() => {
-    state.name = "";
-    state.description = "";
-    state.url = "";
-    emit("submit");
-  });
+  })
+  state.name = "";
+  state.description = "";
+  state.url = "";
+  emit("submit");
 };
 </script>
 <template>

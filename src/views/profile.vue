@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, reactive } from "vue";
-import axios from "../http_client.js";
 import NotLoggedInCard from "../components/NotLoggedInCard.vue";
 import KnowledgeList from "../components/KnowledgeList.vue";
 import EditProfileForm from "../components/EditProfileForm.vue";
@@ -8,30 +7,25 @@ import {
   CalendarIcon,
   PencilIcon
 } from '@heroicons/vue/solid'
+import { store } from '../store';
+import { getProfileById, upsertProfile, getKnowledgesByUserId } from '../supabase-client';
 
 const state = reactive({
-  isLoggedIn: false,
   isEditProfileMode: false,
   profile: {
     id: "",
+    name: "",
     screenName: ""
   },
   userKnowledges: []
 });
 
-const sessionId = localStorage.getItem("sessionId");
-
-const fetchData = () => {
-  axios.get("/users/profile", { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-    .then(doc => {
-      if(!doc.data) return;
-      state.profile = doc.data;
-      state.isLoggedIn = true;
-      return axios.get(`/UserKnowledges/findByUser/${state.profile.id}`)
-    })
-    .then(docs => {
-      state.userKnowledges = docs.data;
-    });
+const fetchData = async () => {
+  const { data } = await getProfileById(store.user.id);
+  if(data)
+    state.profile = data
+  const knowledges = await getKnowledgesByUserId(store.user.id)
+  state.userKnowledges = knowledges.data
 };
 
 onMounted(() => {
@@ -39,18 +33,14 @@ onMounted(() => {
 });
 
 const editProfile = (profile) => {
-  axios.put(`/users/${state.profile.id}`, 
-    profile,
-    { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-  .then(() => {
-    state.isEditProfileMode = false;
-    fetchData();
-  });
+  upsertProfile(store.user.id, profile)
+    .then(fetchData)
+    .then(() => state.isEditProfileMode = false)
 };
 </script>
 <template>
   <div>
-    <div class="mt-2" v-if="!state.isLoggedIn">
+    <div class="mt-2" v-if="!store.user">
       <not-logged-in-card></not-logged-in-card>
     </div>
     <div v-else class="my-2">

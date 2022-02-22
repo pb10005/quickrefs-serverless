@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import axios from "../http_client.js";
+import { updateKnowledge } from "../supabase-client";
 
 const route = useRoute();
 const router = useRouter();
@@ -11,7 +11,20 @@ const state = reactive({
  isPrivate: false
 });
 
-const props = defineProps(["id"]);
+const props = defineProps({
+  id: {
+    type: String,
+    default: ""
+  },
+  knowledge: {
+    type: Object, 
+    default: {
+      name: "",
+      description: "",
+      isPrivate: false
+    }
+  }
+});
 const emit = defineEmits(["submit"]);
 
 const cancel = () => {
@@ -19,23 +32,24 @@ const cancel = () => {
 };
 
 const sendData = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.put(`/Knowledges/${props.id}`, {
-    id: props.id,
+  updateKnowledge(props.id, {
     name: state.name,
     description: state.description,
     isPrivate: state.isPrivate
-  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => emit("submit"));
+  })
+  .then(() => emit("submit"));
 };
 
 onMounted(() => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.get(`/Knowledges/${props.id}`,{ headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-      .then(doc => {
-          state.name = doc.data.name;
-          state.description = doc.data.description;
-          state.isPrivate = doc.data.isPrivate;
-      });
+  state.name = props.knowledge.name;
+  state.description = props.knowledge.description;
+  state.isPrivate = props.knowledge.isPrivate;
+});
+
+watch(props, (curr, _) => {
+  state.name = curr.knowledge.name;
+  state.description = curr.knowledge.description;
+  state.isPrivate = curr.knowledge.isPrivate;
 });
 
 </script>

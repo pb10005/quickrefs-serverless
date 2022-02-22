@@ -1,6 +1,5 @@
 <script setup>
 import { reactive } from 'vue';
-import axios from '../http_client.js';
 import {
   XIcon
 } from '@heroicons/vue/solid'

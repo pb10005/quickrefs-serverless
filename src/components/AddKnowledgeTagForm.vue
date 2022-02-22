@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute } from "vue-router";
-import axios from "../http_client.js";
+import { getTagByName, insertTag, insertKnowledgeTag } from "../supabase-client";
 
 const route = useRoute();
 
@@ -11,27 +11,17 @@ const state = reactive({
  name: "",
 });
 
-const sendData = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.get(`/Tags/findbyname/${state.name}`)
-    .then(doc => {
-      // すでにタグが存在する場合
-      axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => {
-        state.name = "";
-        emit("submit");
-      });
-    }).catch(err => {
-      if(err.response.status == 404) {
-        axios.post("/Tags", {name : state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}}).then(() => {
-          return axios.post("/KnowledgeTags", { knowledgeId: route.params.id, tagName: state.name}, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-        }).then(() => {
-            state.name = "";
-            emit("submit");
-          });;
-      } else {
-        alert(err.response.status);
-      }
-    });
+const sendData = async () => {
+  const tag = await getTagByName(state.name)
+  let id = ""
+  if(tag) {
+    id = tag.id
+  } else {
+    const { data } = await insertTag(state.name)
+    id = data.id
+  }
+  insertKnowledgeTag(route.params.id, id)
+    .then(() => emit("submit"))
 };
 </script>
 <template>

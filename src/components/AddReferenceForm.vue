@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute } from "vue-router";
-import axios from "../http_client.js";
+import { insertRef } from '../supabase-client';
 
 const route = useRoute();
 
@@ -13,19 +13,17 @@ const state = reactive({
  url: ""
 });
 
-const sendData = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.post("/References", {
+const sendData = async () => {
+  await insertRef({
+    knowledgeId: route.params.id,
     name: state.name,
     description: state.description,
-    knowledgeId: route.params.id,
-    url: state.url
-  }, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`} }).then(() => {
-    state.name = "";
-    state.description = "";
-    state.url = "";
-    emit("submit")
-  });
+    url: url
+  })
+  state.name = "";
+  state.description = "";
+  state.url = "";
+  emit("submit")
 };
 </script>
 <template>

@@ -3,21 +3,21 @@ import { onMounted, reactive } from 'vue';
 import TagList from '../components/TagList.vue';
 import KnowledgeList from '../components/KnowledgeList.vue';
 import NotLoggedInCard from '../components/NotLoggedInCard.vue';
-import axios from '../http_client.js';
+
+import { getTags, getKnowledgesByTag } from '../supabase-client';
+import { store } from '../store';
 
 const state = reactive({
   tags: [],
-  isLoggedIn: false,
   knowledges: [],
   isCreateTagFormVisible: false,
   selectedTag: null
 });
 
 const fetchTags = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.get('/Tags', { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-    .then(docs => {
-      state.tags = docs.data;
+  getTags()
+    .then(({ data, error }) => {
+      state.tags = data
     });
 };
 
@@ -25,13 +25,10 @@ const onSubmit = () => {
   fetchTags();
 };
 
-const onTagSelected = (tagId) => {
+const onTagSelected = async (tagId) => {
   state.selectedTag = state.tags.find(t => t.id == tagId);
-  const sessionId = localStorage.getItem("sessionId");
-  axios.get(`/KnowledgeTags/findByTag/${tagId}`, { headers: { sessionId: `quickrefs:sessionId:${sessionId}`}})
-    .then(docs => {
-      state.knowledges = docs.data;
-    });
+  const res = await getKnowledgesByTag(tagId)
+  state.knowledges = res.data
 };
 
 const clearSelection = () => {
@@ -48,7 +45,7 @@ onMounted(() => {
   <div>
   <div class="bg-base rounded-lg my-2 p-2">
     <div class="mt-2">
-      <not-logged-in-card v-if="!state.isLoggedIn"/>
+      <not-logged-in-card v-if="!store.user.id"/>
     </div>
     <div class="">
       <h3 class="font-bold text-headline">ナレッジをタグで検索する</h3>

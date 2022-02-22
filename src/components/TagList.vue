@@ -1,6 +1,5 @@
 <script setup>
 import { reactive } from 'vue';
-import axios from '../http_client.js';
 
 const props = defineProps({
   tags: []

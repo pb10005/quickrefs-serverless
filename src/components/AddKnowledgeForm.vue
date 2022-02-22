@@ -1,7 +1,8 @@
 <script setup>
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import axios from "../http_client.js";
+import { store } from "../store";
+import { insertKnowledge } from '../supabase-client';
 
 const router = useRouter();
 const state = reactive({
@@ -10,13 +11,11 @@ const state = reactive({
  isPrivate: false
 });
 const sendData = () => {
-  const sessionId = localStorage.getItem("sessionId");
-  axios.post("/Knowledges", {
+  insertKnowledge({
+    owner: store.user.id,
     name: state.name,
     description: state.description,
     isPrivate: state.isPrivate
-  }, { 
-    headers: { sessionId: `quickrefs:sessionId:${sessionId}`}
   })
   .then((doc) => router.push(`/knowledge/view/${doc.data.id}`));
 };
