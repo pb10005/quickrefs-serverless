@@ -125,6 +125,7 @@ export const getRefsByKnowledgeId = async (knowledgeId) => {
                 name: x.name,
                 description: x.description,
                 knowledgeId: x.knowledge_id,
+                url: x.url,
                 createdAt: x.created_at,
                 updatedAt: x.updated_at
             }
