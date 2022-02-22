@@ -37,7 +37,6 @@ const clearSelection = () => {
 };
 
 onMounted(() => {
-  state.isLoggedIn = localStorage.getItem("sessionId") ? true : false;
   fetchTags();
 });
 </script>
@@ -45,7 +44,7 @@ onMounted(() => {
   <div>
   <div class="bg-base rounded-lg my-2 p-2">
     <div class="mt-2">
-      <not-logged-in-card v-if="!store.user.id"/>
+      <not-logged-in-card v-if="!store.user"/>
     </div>
     <div class="">
       <h3 class="font-bold text-headline">ナレッジをタグで検索する</h3>

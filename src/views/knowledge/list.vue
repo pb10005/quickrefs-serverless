@@ -18,7 +18,7 @@ onMounted(async () => {
 <template>
   <div>
     <div class="bg-base mt-2 rounded-lg p-2">
-      <not-logged-in-card v-if="!store.user.id"/>
+      <not-logged-in-card v-if="!store.user"/>
       <h3 class="text-headline font-bold text-lg">公開されたナレッジ</h3>
       <div class="">
         <knowledge-list :knowledgeList="state.list"/>

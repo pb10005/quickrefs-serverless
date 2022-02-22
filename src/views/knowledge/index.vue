@@ -48,7 +48,7 @@ const fetchKnowledges = async () => {
   const profile = await getProfileById(knowledge.data.owner);
   state.ownerId = profile.data.id
   state.owner = profile.data.screenName
-  state.isOwner = state.ownerId === store.user.id
+  state.isOwner = store.user? state.ownerId === store.user.id: false
 
   const tags = await getKnowledgeTags(route.params.id)
   state.tags = tags.data

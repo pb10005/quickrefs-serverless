@@ -6,7 +6,8 @@ export const getKnowledges = async () => {
         .from('knowledges')
         .select()
     return {
-        data: data.map(x => {
+        data: data.filter(x => x !== null)
+        .map(x => {
             return {
                 id: x.id,
                 name: x.name,
@@ -46,14 +47,16 @@ export const getKnowledgesByTag = async (tagId) => {
     .select('knowledges(*)')
     .match({ tag_id: tagId })
     return {
-        data: data.map(x => {
+        data: data.map(x => x.knowledges)
+        .filter(x => x !== null)
+        .map(k => {
             return {
-                id: x.knowledges.id,
-                name: x.knowledges.name,
-                description: x.description,
-                isPrivate: x.knowledges.is_private,
-                createdAt: x.knowledges.created_at,
-                updatedAt: x.knowledges.updated_at
+                id: k.id,
+                name: k.name,
+                description: k.description,
+                isPrivate: k.is_private,
+                createdAt: k.created_at,
+                updatedAt: k.updated_at
             }
         }),
         error
