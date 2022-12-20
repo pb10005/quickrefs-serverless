@@ -1,8 +1,8 @@
 <script setup>
 import KnowledgeList from "../../components/KnowledgeList.vue";
 import NotLoggedInCard from "../../components/NotLoggedInCard.vue";
-import { reactive } from "@vue/reactivity";
-import { getKnowledges } from '../../supabase-client';
+import { ref, reactive } from "@vue/reactivity";
+import { getKnowledges, textSearchKnowledges } from '../../supabase-client';
 import { onMounted } from "vue";
 import { store } from '../../store';
 
@@ -11,9 +11,15 @@ const state = reactive({
 });
 
 onMounted(async () => {
+  await fetchAll()
+});
+
+const fetchAll = async () => {
   const { data } = await getKnowledges();
   state.list = data;
-});
+}
+
+
 </script>
 <template>
   <div>

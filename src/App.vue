@@ -7,6 +7,7 @@ import { store } from './store';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
+  { name: 'Explore', href: '/explore', current: false },
   { name: 'Knowledge', href: '/knowledge/list', current: false },
   { name: 'Profile', href: '/profile', current: false },
 ]

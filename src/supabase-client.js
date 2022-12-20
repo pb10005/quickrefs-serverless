@@ -21,6 +21,30 @@ export const getKnowledges = async () => {
     }
 }
 
+export const textSearchKnowledges = async (word) => {
+    const { data, error } = await supabase
+        // .from('knowledges')
+        .from('refs')
+        .select()
+        .like('name', `%${word}%`)
+
+    return {
+        data: data.filter(x => x !== null)
+        .map(x => {
+            return {
+                id: x.id,
+                name: x.name,
+                description: x.description,
+                knowledgeId: x.knowledge_id,
+                url: x.url,
+                createdAt: x.created_at,
+                updatedAt: x.updated_at
+            }
+        }),
+        error
+    }
+}
+
 export const getKnowledgesByUserId = async (id) => {
     const { data, error } = await supabase
         .from('knowledges')

@@ -8,6 +8,7 @@ import knowledge_list from './views/knowledge/list.vue';
 import knowledge from './views/knowledge/index.vue';
 import knowledge_add from './views/knowledge/add.vue';
 import profile from './views/profile.vue';
+import explore from './views/explore.vue';
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/profile',
     component: profile
+  },
+  {
+    path: '/explore',
+    component: explore
   }
 ];
 
