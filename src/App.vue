@@ -55,7 +55,7 @@ supabase.auth.onAuthStateChange((_, session) => {
       </DisclosurePanel>
     </Disclosure>
     <div class="bg-secondary grid grid-cols-12"> 
-          <router-view class="min-h-screen col-span-12 md:col-start-3 md:col-span-8"/>
+          <router-view :key="$route.query" class="min-h-screen col-span-12 md:col-start-3 md:col-span-8"/>
     </div>
     <footer>
       これはサンドボックス環境です。すべてのデータは予告なく削除される可能性があります。

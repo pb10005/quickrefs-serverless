@@ -237,6 +237,13 @@ export const upsertProfile = async (id, { name, screenName }) => {
 }
 
 // tags
+export const getTagById = async (id) => {
+    const { data, error } = await supabase.from('tags')
+        .select()
+        .match({ id: id })
+    return data[0]
+}
+
 export const getTagByName = async (name) => {
     const { data, error } = await supabase.from('tags')
         .select()
